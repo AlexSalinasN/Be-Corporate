@@ -1,6 +1,6 @@
 {
-  "name": "BE Corporate",
-  "description": "Sistema de Aprendizaje Corporativo. Convertimos la comunicación en una ventaja competitiva.",
+  "name": "Be Corporate",
+  "description": "High-Performance Meetings™ — Convierta sus reuniones en una ventaja competitiva. Piloto corporativo de 4 semanas de Be Corporate.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
