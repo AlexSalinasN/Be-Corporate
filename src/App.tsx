@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Header, SectionKey } from './components/Header';
 import { Hero } from './components/Hero';
 import { ChallengeSection } from './components/ChallengeSection';
@@ -13,14 +13,12 @@ import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { BookingModal } from './components/BookingModal';
 import { ChatbotWidget } from './components/ChatbotWidget';
-import { Eye, Layers, ArrowRight, X, Sparkles } from 'lucide-react';
 
 export function App() {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<SectionKey>('inicio');
-  const [showAllSections, setShowAllSections] = useState(false);
 
-  // Set of specifically revealed non-default sections
+  // Set of revealed non-default sections
   const [revealedSections, setRevealedSections] = useState<Set<SectionKey>>(new Set());
 
   const handleOpenBooking = () => {
@@ -61,15 +59,7 @@ export function App() {
     handleSelectSection('sistema');
   };
 
-  const handleResetToDefaultView = () => {
-    setRevealedSections(new Set());
-    setShowAllSections(false);
-    setActiveSection('inicio');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   const isVisible = (key: SectionKey): boolean => {
-    if (showAllSections) return true;
     if (key === 'inicio' || key === 'sistema' || key === 'faq' || key === 'contacto') {
       return true;
     }
@@ -78,39 +68,12 @@ export function App() {
 
   return (
     <div className="min-h-screen bg-white text-slate-900 font-['Inter'] selection:bg-[#0052CC] selection:text-white flex flex-col">
-      {/* Navigation Header with larger black & white logo */}
+      {/* Navigation Header with single-line white on black logo & clean links */}
       <Header
         activeSection={activeSection}
         onSelectSection={handleSelectSection}
         onOpenBooking={handleOpenBooking}
-        showAllSections={showAllSections}
-        onToggleShowAll={() => setShowAllSections(!showAllSections)}
       />
-
-      {/* Floating View Control Banner when non-default sections are expanded */}
-      {(revealedSections.size > 0 || showAllSections) && (
-        <div className="bg-[#051C2C] text-white py-2 px-4 sticky top-[68px] z-30 border-b border-slate-700/80 shadow-md">
-          <div className="container-corporate flex flex-wrap items-center justify-between gap-3 text-xs">
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#86BC25]"></span>
-              <span className="font-semibold text-slate-200">
-                {showAllSections
-                  ? 'Visualizando todas las 10 páginas de la firma'
-                  : `Secciones adicionales activadas: ${Array.from(revealedSections).join(', ')}`}
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <button
-                onClick={handleResetToDefaultView}
-                className="flex items-center gap-1.5 px-3 py-1 bg-slate-800 hover:bg-[#0052CC] text-white rounded text-[11px] font-bold uppercase tracking-wider transition-colors cursor-pointer"
-              >
-                <X className="w-3.5 h-3.5 text-[#38BDF8]" />
-                <span>Restablecer Vista Esencial (Págs 1, 4, 9, 10)</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Main Content Sections */}
       <main className="flex-1">
@@ -154,12 +117,12 @@ export function App() {
           <AudienceSection onOpenBooking={handleOpenBooking} />
         )}
 
-        {/* PAGE 9: PREGUNTAS FRECUENTES & GOBERNANZA (Always visible in default view) */}
+        {/* PAGE 9: PREGUNTAS FRECUENTES (Always visible in default view) */}
         {isVisible('faq') && (
           <FAQSection />
         )}
 
-        {/* PAGE 10: CONTACTO & AGENDAMIENTO (Always visible in default view) */}
+        {/* PAGE 10: CONTACTO (Always visible in default view) */}
         {isVisible('contacto') && (
           <ContactSection onOpenBooking={handleOpenBooking} />
         )}
@@ -168,7 +131,7 @@ export function App() {
       {/* Footer */}
       <Footer />
 
-      {/* Booking Modal (Zoom 20 min) */}
+      {/* Booking Modal */}
       <BookingModal isOpen={isBookingOpen} onClose={handleCloseBooking} />
 
       {/* Interactive AI Chatbot Widget */}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, CheckCircle2, Shield, ArrowRight, Sparkles } from 'lucide-react';
+import { CheckCircle2, Shield, ArrowRight } from 'lucide-react';
 import { PILOTO_SPECS, PILOTO_ENTREGABLES } from '../data';
 
 interface PilotSectionProps {
@@ -12,11 +12,8 @@ export const PilotSection: React.FC<PilotSectionProps> = ({ onOpenBooking }) => 
       <div className="container-corporate">
         {/* Header */}
         <div className="max-w-3xl mb-16">
-          <div className="flex items-center gap-2 mb-3">
-            <span className="w-2 h-2 rounded-full bg-[#86BC25]"></span>
-            <span className="text-xs font-bold uppercase tracking-widest text-[#0052CC] font-mono">
-              Página 05 · Programa Piloto Corporativo
-            </span>
+          <div className="text-xs font-bold uppercase tracking-widest text-[#0052CC] font-mono mb-3">
+            Programa Piloto Corporativo
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#051C2C] tracking-tight leading-tight mb-4">
             High-Performance Meetings™
@@ -77,7 +74,7 @@ export const PilotSection: React.FC<PilotSectionProps> = ({ onOpenBooking }) => 
                 <h3 className="text-base font-extrabold text-[#051C2C]">7 Entregables Tangibles</h3>
                 <span className="text-xs text-slate-500 font-medium">Learning & Workplace Performance Evidence™</span>
               </div>
-              <div className="w-8 h-8 rounded-full bg-[#86BC25]/20 text-[#2D6A12] flex items-center justify-center font-bold">
+              <div className="w-8 h-8 rounded-full bg-blue-50 text-[#0052CC] flex items-center justify-center font-bold">
                 <Shield className="w-4 h-4" />
               </div>
             </div>

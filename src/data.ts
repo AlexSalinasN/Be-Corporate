@@ -161,7 +161,7 @@ export const FAQ_ITEMS: FAQItem[] = [
   },
   {
     q: '¿Qué nivel de involucramiento requiere del líder del equipo o sponsor?',
-    a: 'El sponsor participa en el diagnóstico inicial (30 min), en la apertura de la primera sesión, y en la sesión ejecutiva de entrega de resultados y síntesis de avances. El diseño minimiza la fricción para asegurar máximo impacto sin saturar la agenda directiva.',
+    a: 'El sponsor participa en el diagnóstico inicial, en la apertura de la primera sesión, y en la sesión ejecutiva de entrega de resultados y síntesis de avances. El diseño minimiza la fricción para asegurar máximo impacto sin saturar la agenda directiva.',
   },
   {
     q: '¿Cuál es el tamaño idóneo de equipo para el piloto?',
@@ -169,6 +169,6 @@ export const FAQ_ITEMS: FAQItem[] = [
   },
   {
     q: '¿Puede impartirse en formato 100% remoto para equipos distribuidos?',
-    a: 'Sí. El programa está optimizado tanto para formato presencial en sala de juntas corporativa como para sesiones en vivo de alta interacción vía Zoom/Teams, así como modelos híbridos con herramientas digitales de colaboración.',
+    a: 'Sí. El programa está optimizado tanto para formato presencial en sala de juntas corporativa como para sesiones virtuales en vivo de alta interacción, así como modelos híbridos con herramientas colaborativas.',
   },
 ];

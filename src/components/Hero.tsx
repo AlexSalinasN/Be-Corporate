@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, CheckCircle2, Award, Clock, Users, Calendar, Sparkles, TrendingUp, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Award, Clock, Calendar, Sparkles, TrendingUp, ShieldCheck } from 'lucide-react';
 import { CLIENT_LOGOS } from '../data';
 
 interface HeroProps {
@@ -10,20 +10,16 @@ interface HeroProps {
 export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onExplorePilot }) => {
   return (
     <section id="inicio" className="relative bg-white pt-10 pb-16 lg:pt-14 lg:pb-20 border-b border-slate-200 overflow-hidden font-['Inter']">
-      {/* Dynamic Background Architectural Mesh Grid */}
-      <div className="absolute inset-0 bg-[radial-gradient(#0052cc_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.07] pointer-events-none" />
-      <div className="absolute top-0 right-1/4 w-96 h-96 bg-sky-200/40 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-1/3 left-10 w-72 h-72 bg-[#86BC25]/10 rounded-full blur-3xl pointer-events-none" />
+      {/* Background Architectural Mesh Grid */}
+      <div className="absolute inset-0 bg-[radial-gradient(#0052cc_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.05] pointer-events-none" />
+      <div className="absolute top-0 right-1/4 w-96 h-96 bg-blue-100/50 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/3 left-10 w-72 h-72 bg-sky-100/40 rounded-full blur-3xl pointer-events-none" />
 
       <div className="container-corporate relative z-10">
-        {/* Practice Brief Banner - Modern McKinsey / EY / Deloitte style tag */}
+        {/* Practice Tag */}
         <div className="flex flex-wrap items-center gap-2.5 mb-6">
           <div className="inline-flex items-center gap-2 bg-[#051C2C] text-white px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-xs">
-            <span className="w-2 h-2 rounded-full bg-[#86BC25] animate-ping" />
-            <span>Página 01 · Strategic Advisory Brief</span>
-          </div>
-          <div className="inline-flex items-center gap-1.5 bg-blue-50 border border-blue-200 text-[#0052CC] px-3 py-1.5 rounded-full text-xs font-semibold">
-            <Sparkles className="w-3.5 h-3.5 text-[#0052CC]" />
+            <span className="w-2 h-2 rounded-full bg-[#00A3E0]" />
             <span>Communication That Drives Business</span>
           </div>
         </div>
@@ -33,11 +29,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onExplorePilot }) => 
           <div className="lg:col-span-7">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#051C2C] tracking-tight leading-[1.12] mb-6 font-['Inter']">
               Convierta sus reuniones en una{' '}
-              <span className="relative inline-block text-[#0052CC]">
-                ventaja competitiva
-                <span className="absolute left-0 right-0 -bottom-1 h-1.5 bg-[#86BC25]/70 rounded-full"></span>
-              </span>
-              .
+              <span className="text-[#0052CC]">ventaja competitiva</span>.
             </h1>
 
             <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-normal mb-8 max-w-2xl">
@@ -64,10 +56,9 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onExplorePilot }) => 
             </div>
           </div>
 
-          {/* Top Right: Executive Metric Highlights */}
+          {/* Top Right: Metric Highlights */}
           <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="bg-[#051C2C] text-white p-5 rounded-lg border border-slate-800 shadow-md relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-24 h-24 bg-[#0052CC]/30 rounded-bl-full pointer-events-none" />
               <div className="flex items-center gap-2 text-[#38BDF8] text-xs font-bold uppercase tracking-wider mb-2">
                 <Award className="w-4 h-4" />
                 <span>Programa</span>
@@ -87,7 +78,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onExplorePilot }) => 
 
             <div className="bg-white p-5 rounded-lg border border-slate-200 shadow-xs sm:col-span-2 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#86BC25]/20 text-[#2D6A12] flex items-center justify-center font-bold">
+                <div className="w-10 h-10 rounded-full bg-blue-50 text-[#0052CC] flex items-center justify-center font-bold">
                   <TrendingUp className="w-5 h-5" />
                 </div>
                 <div>
@@ -102,25 +93,21 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onExplorePilot }) => 
           </div>
         </div>
 
-        {/* VERY STRIKING IMAGE SECTION (Deloitte/McKinsey Hero Visual) */}
+        {/* STRIKING IMAGE HERO (Deloitte/McKinsey Hero Visual) */}
         <div className="relative rounded-2xl overflow-hidden border border-slate-300 shadow-2xl bg-[#051C2C] mb-12 group">
-          {/* Main Visual Image */}
           <div className="relative h-[320px] sm:h-[420px] lg:h-[480px] w-full overflow-hidden">
             <img
               src="/assets/hero_striking.jpg"
-              alt="Líderes ejecutivos en sala de consejo corporativo con vista panorámica a la ciudad"
-              className="w-full h-full object-cover object-center group-hover:scale-[1.015] transition-transform duration-700 ease-out"
+              alt="Líderes ejecutivos en sesión estratégica en sala de consejo"
+              className="w-full h-full object-cover object-center group-hover:scale-[1.01] transition-transform duration-700 ease-out"
               referrerPolicy="no-referrer"
             />
-            {/* Cinematic Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#051C2C] via-[#051C2C]/40 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#051C2C]/80 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#051C2C] via-[#051C2C]/30 to-transparent" />
           </div>
 
-          {/* Visual Floating Executive Badge on the Image */}
           <div className="absolute bottom-6 left-6 right-6 lg:left-10 lg:right-10 flex flex-col md:flex-row items-start md:items-end justify-between gap-4 text-white">
-            <div className="max-w-2xl bg-[#051C2C]/85 backdrop-blur-md p-5 rounded-xl border border-slate-700/80 shadow-lg">
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#86BC25] mb-1.5">
+            <div className="max-w-2xl bg-[#051C2C]/90 backdrop-blur-md p-5 rounded-xl border border-slate-700/80 shadow-lg">
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#00A3E0] mb-1.5">
                 <ShieldCheck className="w-4 h-4" />
                 <span>Liderazgo de Alto Impacto</span>
               </div>
@@ -131,19 +118,14 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onExplorePilot }) => 
                 Metodología validada en organizaciones líderes de alta exigencia estratégica.
               </p>
             </div>
-
-            <div className="hidden sm:flex items-center gap-2 bg-[#0052CC] text-white text-xs font-bold uppercase tracking-wider px-4 py-3 rounded-lg shadow-md whitespace-nowrap">
-              <Sparkles className="w-4 h-4 text-[#FFE600]" />
-              <span>The Be System™ Inside</span>
-            </div>
           </div>
         </div>
 
-        {/* Corporate Client Ticker */}
+        {/* Client Ticker */}
         <div className="pt-4 border-t border-slate-200">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-2 mb-3">
             <div className="text-[11px] font-bold uppercase tracking-widest text-slate-600 flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#86BC25]" />
+              <span className="w-2 h-2 rounded-full bg-[#0052CC]" />
               <span>Líderes de organizaciones de alto crecimiento confían en Be Corporate</span>
             </div>
             <div className="text-[11px] text-slate-500 font-mono">

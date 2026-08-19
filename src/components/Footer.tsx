@@ -8,19 +8,20 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-[#0A192F] text-slate-400 font-['Inter'] pt-16 pb-12 border-t border-slate-800">
+    <footer className="bg-[#051C2C] text-slate-400 font-['Inter'] pt-16 pb-12 border-t border-slate-800">
       <div className="container-corporate">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-slate-800">
-          {/* Col 1: Brand & Strategic Positioning */}
+          {/* Col 1: Brand & Positioning */}
           <div className="lg:col-span-5 space-y-4">
             <div className="flex items-center gap-3">
-              <Logo variant="white-on-dark" size="md" />
+              <Logo size="lg" />
             </div>
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-md">
-              Communication That Drives Business. Ayudamos a líderes y equipos directivos a transformar sus reuniones en
-              conversaciones más claras, decisiones mejor definidas y compromisos que se convierten en acciones.
+              Communication Beyond Language · Communication That Drives Business. Ayudamos a líderes y equipos directivos a
+              transformar sus reuniones en conversaciones más claras, decisiones mejor definidas y compromisos que se
+              convierten en acciones.
             </p>
-            <div className="text-xs font-mono text-sky-400 flex items-center gap-2">
+            <div className="text-xs font-mono text-[#38BDF8] flex items-center gap-2">
               <ShieldCheck className="w-4 h-4" />
               <span>High-Performance Meetings™ · The Be System™</span>
             </div>
@@ -70,27 +71,27 @@ export const Footer: React.FC = () => {
 
           {/* Col 3: Direct Leadership & Contact */}
           <div className="lg:col-span-4 space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-widest text-white">Contacto Ejecutivo</h4>
+            <h4 className="text-xs font-bold uppercase tracking-widest text-white">Contacto Directivo</h4>
             <div className="space-y-2.5 text-xs text-slate-300">
               <div>
-                <span className="font-bold text-white block">Manuel Alejandro Salinas Núñez</span>
-                <span className="text-[11px] text-slate-400">Líder de Práctica</span>
+                <span className="font-bold text-white block">Dirección de Práctica</span>
+                <span className="text-[11px] text-slate-400">Be Corporate Strategic Advisory</span>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="w-3.5 h-3.5 text-sky-400" />
-                <a href="mailto:asalinas@becorporate.mx" className="hover:text-white transition-colors">
-                  asalinas@becorporate.mx
+                <Mail className="w-3.5 h-3.5 text-[#38BDF8]" />
+                <a href="mailto:contacto@becorporate.mx" className="hover:text-white transition-colors">
+                  contacto@becorporate.mx
                 </a>
               </div>
               <div className="flex items-center gap-2">
-                <Phone className="w-3.5 h-3.5 text-sky-400" />
+                <Phone className="w-3.5 h-3.5 text-[#38BDF8]" />
                 <a href="tel:5535813240" className="hover:text-white transition-colors">
                   55 3581 3240
                 </a>
               </div>
               <div className="flex items-center gap-2">
-                <MapPin className="w-3.5 h-3.5 text-sky-400" />
-                <span>Ciudad de México · Proyectos Regionales</span>
+                <MapPin className="w-3.5 h-3.5 text-[#38BDF8]" />
+                <span>Ciudad de México · Cobertura Internacional</span>
               </div>
             </div>
           </div>
@@ -100,12 +101,12 @@ export const Footer: React.FC = () => {
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
           <div>
             © {new Date().getFullYear()} Be Corporate. Todos los derechos reservados. High-Performance Meetings™ y The
-            Be System™ son marcas y metodologías de Be Corporate.
+            Be System™ son marcas de Be Corporate.
           </div>
           <div className="flex items-center gap-4">
             <button
               onClick={scrollToTop}
-              className="flex items-center gap-1 text-slate-400 hover:text-white transition-colors"
+              className="flex items-center gap-1 text-slate-400 hover:text-white transition-colors cursor-pointer"
             >
               <span>Volver arriba</span>
               <ArrowUp className="w-3 h-3" />

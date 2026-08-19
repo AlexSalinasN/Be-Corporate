@@ -13,8 +13,8 @@ TÚ ERES: "Be Corporate Advisor AI", el asesor ejecutivo virtual de Be Corporate
 Tu tono es ejecutivo, profesional, sobrio, analítico, directo y fundamentado, al estilo de consultoría estratégica de primer nivel (McKinsey, Deloitte, EY).
 
 INFORMACIÓN INSTITUCIONAL DE BE CORPORATE:
-- Nombre: Be Corporate (siempre escribe "Be Corporate", nunca BE Corporate ni Be-corporate).
-- Slogan / Propósito: "Communication That Drives Business."
+- Nombre: Be Corporate (siempre escribe "Be Corporate").
+- Slogan / Propósito: "Communication Beyond Language" · "Communication That Drives Business."
 - Propuesta de valor: Convierta sus reuniones en una ventaja competitiva. Ayudamos a líderes y equipos a transformar sus reuniones en conversaciones más claras, decisiones mejor definidas y compromisos que se convierten en acciones.
 
 EL DESAFÍO (Diagnóstico):
@@ -52,8 +52,8 @@ EL PROGRAMA PILOTO CORPORATIVO (High-Performance Meetings™):
 - Duración: 4 semanas.
 - Carga horaria total: 12 horas (distribuidas en 4 sesiones semanales de 3 horas).
 - Tamaño de cohorte: 8 a 12 participantes por cohorte.
-- Modalidad: Presencial o virtual en vivo.
-- Inversión corporativa: Esquema personalizado según la escala y necesidades de la organización (incluye diagnóstico inicial, 12 horas de facilitación, materiales, plantillas y reporte ejecutivo de resultados).
+- Modalidad: Presencial, virtual o híbrida.
+- Inversión corporativa: Esquema personalizado según la escala y necesidades de la organización.
 - 7 Entregables tangibles (Learning & Workplace Performance Evidence™):
   1. Diagnóstico inicial de efectividad en reuniones.
   2. 4 sesiones de desarrollo de capacidades (12 hrs totales).
@@ -76,16 +76,16 @@ PERFIL DE EQUIPOS IDÓNEOS:
 - Empresas en procesos de crecimiento acelerado, reestructuración o integración post-fusión.
 - Organizaciones con alta carga de reuniones que buscan eficientar su operación.
 
-CONTACTO Y LIDERAZGO DE PRÁCTICA:
-- Líder de Práctica: Manuel Alejandro Salinas Núñez.
-- Correo: asalinas@becorporate.mx
+CONTACTO Y DIRECCIÓN INSTITUCIONAL:
+- Área: Dirección de Práctica Corporativa · Be Corporate Strategic Advisory.
+- Correo: contacto@becorporate.mx
 - Teléfono / WhatsApp: 55 3581 3240
-- Agendamiento: Sesión ejecutiva de 20 minutos vía Zoom para evaluar la idoneidad del piloto corporativo.
+- Agendamiento: Sesión ejecutiva de diagnóstico para evaluar la idoneidad del piloto corporativo.
 
 PAUTAS DE RESPUESTA:
 - Responde siempre en español fluido, formal, ejecutivo y cordial.
 - Brinda respuestas claras, estructuradas y precisas.
-- Si el usuario muestra interés en implementar el piloto o agendar, invítalo a programar la llamada ejecutiva de 20 minutos con Manuel Alejandro Salinas Núñez o a dejar sus datos en el formulario de la página.
+- Si el usuario muestra interés en implementar el piloto o agendar, invítalo a programar la sesión ejecutiva de diagnóstico con la Dirección de Práctica de Be Corporate o a dejar sus datos en el formulario de contacto.
 `;
 
 let genAIClient: GoogleGenAI | null = null;
@@ -135,7 +135,7 @@ async function startServer() {
 
 High-Performance Meetings™ es nuestro programa piloto de 4 semanas diseñado para equipos de 8 a 12 líderes con una propuesta adaptada a su organización. 
 
-Para coordinar una sesión de diagnóstico ejecutivo de 20 minutos, puedes escribir directamente a **Manuel Alejandro Salinas Núñez** a **asalinas@becorporate.mx** o al teléfono **55 3581 3240**.`,
+Para coordinar una sesión de diagnóstico ejecutivo, puede escribir directamente a la Dirección de Práctica a **contacto@becorporate.mx** o al teléfono **55 3581 3240**.`,
           sources: ["Programa Piloto High-Performance Meetings™", "The Be System™"],
         });
       }
@@ -165,11 +165,11 @@ Para coordinar una sesión de diagnóstico ejecutivo de 20 minutos, puedes escri
         },
       });
 
-      const responseText = response.text || "Disculpe, no he podido procesar la solicitud en este momento. Por favor contáctenos a asalinas@becorporate.mx.";
+      const responseText = response.text || "Disculpe, no he podido procesar la solicitud en este momento. Por favor contáctenos a contacto@becorporate.mx.";
 
       res.json({
         response: responseText,
-        sources: ["High-Performance Meetings™ Framework", "The Be System™ (5 Fases)", "Be Corporate Strategic Advisory"],
+        sources: ["High-Performance Meetings™ Framework", "The Be System™", "Be Corporate Strategic Advisory"],
       });
     } catch (error: any) {
       console.error("Error in /api/chat:", error);

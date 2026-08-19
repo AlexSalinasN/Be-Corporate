@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlertCircle, ArrowDown, Sparkles } from 'lucide-react';
+import { AlertCircle, ArrowDown } from 'lucide-react';
 import { DESAFIO_SENALES } from '../data';
 
 interface ChallengeSectionProps {
@@ -12,11 +12,8 @@ export const ChallengeSection: React.FC<ChallengeSectionProps> = ({ onExploreSol
       <div className="container-corporate">
         {/* Section Header */}
         <div className="max-w-3xl mb-16">
-          <div className="flex items-center gap-2 mb-3">
-            <span className="w-2 h-2 rounded-full bg-[#86BC25]"></span>
-            <span className="text-xs font-bold uppercase tracking-widest text-[#0052CC] font-mono">
-              Página 02 · Diagnóstico Estratégico
-            </span>
+          <div className="text-xs font-bold uppercase tracking-widest text-[#0052CC] font-mono mb-3">
+            Diagnóstico de Efectividad
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#051C2C] tracking-tight leading-tight mb-4">
             El problema no son las reuniones.
@@ -51,7 +48,7 @@ export const ChallengeSection: React.FC<ChallengeSectionProps> = ({ onExploreSol
                   <span className="font-mono text-xs font-bold text-[#0052CC] bg-blue-50 px-2.5 py-1 rounded border border-blue-100">
                     SEÑAL 0{index + 1}
                   </span>
-                  <span className="w-2 h-2 rounded-full bg-slate-300 group-hover:bg-[#86BC25] transition-colors" />
+                  <span className="w-2 h-2 rounded-full bg-slate-300 group-hover:bg-[#0052CC] transition-colors" />
                 </div>
                 <h4 className="text-base font-bold text-[#051C2C] mb-2 group-hover:text-[#0052CC] transition-colors">
                   {item.title}
@@ -72,7 +69,7 @@ export const ChallengeSection: React.FC<ChallengeSectionProps> = ({ onExploreSol
                   valiosos de la organización.
                 </p>
               </div>
-              <div className="mt-4 pt-3 border-t border-slate-700/80 flex items-center justify-between text-xs text-[#86BC25] font-semibold">
+              <div className="mt-4 pt-3 border-t border-slate-700/80 flex items-center justify-between text-xs text-[#38BDF8] font-semibold">
                 <span>Capacidad de Ejecución</span>
                 <span className="font-mono font-bold">-35% Eficiencia</span>
               </div>
@@ -100,7 +97,7 @@ export const ChallengeSection: React.FC<ChallengeSectionProps> = ({ onExploreSol
               onClick={onExploreSolution}
               className="text-xs font-bold uppercase tracking-wider text-[#0052CC] hover:text-[#051C2C] whitespace-nowrap cursor-pointer"
             >
-              Ver la solución metodológica (Pág. 03) →
+              Ver la solución metodológica →
             </button>
           )}
         </div>

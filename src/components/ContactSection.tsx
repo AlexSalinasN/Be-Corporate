@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle2, Shield, Calendar, AlertCircle, Sparkles } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle2, Shield, Calendar, Building2 } from 'lucide-react';
 import { LeadFormData } from '../types';
 
 interface ContactSectionProps {
@@ -42,7 +42,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenBooking })
         setStatus('success');
         setStatusMessage(
           data.details ||
-            'Su solicitud ha sido recibida. El equipo directivo de Be Corporate se pondrá en contacto en menos de 24 horas hábiles.'
+            'Su solicitud ha sido recibida. La Dirección de Práctica de Be Corporate se pondrá en contacto en menos de 24 horas hábiles.'
         );
         setFormData({
           nombre: '',
@@ -60,7 +60,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenBooking })
       console.warn('Form submission fallback:', err);
       setStatus('success');
       setStatusMessage(
-        'Su información ha sido registrada exitosamente. Manuel Alejandro Salinas Núñez le contactará a la brevedad.'
+        'Su información ha sido registrada exitosamente. La Dirección de Práctica de Be Corporate le contactará a la brevedad.'
       );
     }
   };
@@ -69,47 +69,42 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenBooking })
     <section id="contacto" className="py-20 lg:py-28 bg-white font-['Inter']">
       <div className="container-corporate">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          {/* Left Column: Direct Practice Leadership Contact */}
+          {/* Left Column: Practice Leadership Contact */}
           <div className="lg:col-span-5 space-y-8">
             <div>
-              <div className="flex items-center gap-2 mb-3">
-                <span className="w-2 h-2 rounded-full bg-[#86BC25]"></span>
-                <span className="text-xs font-bold uppercase tracking-widest text-[#0052CC] font-mono">
-                  Página 10 · Liderazgo de Práctica
-                </span>
+              <div className="text-xs font-bold uppercase tracking-widest text-[#0052CC] font-mono mb-3">
+                Dirección Institucional
               </div>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#051C2C] tracking-tight leading-tight mb-4">
                 Iniciemos la conversación
               </h2>
               <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
-                Hable directamente con la dirección de práctica de Be Corporate para evaluar la idoneidad del piloto en su
+                Coordine directamente con la Dirección de Práctica de Be Corporate para evaluar la idoneidad del piloto en su
                 organización.
               </p>
             </div>
 
             {/* Executive Contact Card */}
             <div className="bg-[#051C2C] text-white p-7 rounded-2xl border border-slate-800 shadow-xl relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-[#0052CC]/25 rounded-bl-full pointer-events-none" />
-
               <div className="flex items-center gap-3.5 mb-5 pb-5 border-b border-slate-800 relative z-10">
                 <div className="w-12 h-12 rounded-xl bg-[#0052CC] text-white font-extrabold flex items-center justify-center text-lg shadow-inner">
-                  MS
+                  <Building2 className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-base font-extrabold text-white">Manuel Alejandro Salinas Núñez</h3>
-                  <p className="text-xs text-[#38BDF8] font-medium">Líder de Práctica · Be Corporate</p>
+                  <h3 className="text-base font-extrabold text-white">Dirección de Práctica</h3>
+                  <p className="text-xs text-[#38BDF8] font-medium">Be Corporate Strategic Advisory</p>
                 </div>
               </div>
 
               <div className="space-y-3.5 text-xs text-slate-300 relative z-10">
                 <div className="flex items-center gap-3">
                   <Mail className="w-4 h-4 text-[#38BDF8] shrink-0" />
-                  <a href="mailto:asalinas@becorporate.mx" className="hover:text-white transition-colors underline font-medium">
-                    asalinas@becorporate.mx
+                  <a href="mailto:contacto@becorporate.mx" className="hover:text-white transition-colors underline font-medium">
+                    contacto@becorporate.mx
                   </a>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Phone className="w-4 h-4 text-[#86BC25] shrink-0" />
+                  <Phone className="w-4 h-4 text-[#38BDF8] shrink-0" />
                   <a href="tel:5535813240" className="hover:text-white transition-colors font-medium">
                     55 3581 3240
                   </a>
@@ -126,7 +121,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenBooking })
                   className="w-full bg-[#0052CC] hover:bg-[#003E99] text-white text-xs font-bold uppercase tracking-wider py-3.5 rounded-lg transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer"
                 >
                   <Calendar className="w-4 h-4" />
-                  <span>Agendar videollamada de 20 min</span>
+                  <span>Agendar sesión de diagnóstico ejecutivo</span>
                 </button>
               </div>
             </div>
@@ -150,14 +145,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenBooking })
                   Complete los datos de su equipo para recibir la propuesta ejecutiva
                 </p>
               </div>
-              <span className="text-[11px] font-mono font-bold text-[#0052CC] bg-white px-3 py-1 rounded-full border border-slate-200 shadow-2xs">
+              <span className="text-[11px] font-mono font-bold text-[#0052CC] bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
                 HubSpot Form Ready
               </span>
             </div>
 
             {status === 'success' ? (
-              <div className="p-8 bg-white border border-emerald-200 rounded-xl text-center space-y-4 animate-in fade-in">
-                <div className="w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto">
+              <div className="p-8 bg-white border border-blue-200 rounded-xl text-center space-y-4 animate-in fade-in">
+                <div className="w-12 h-12 rounded-full bg-blue-50 text-[#0052CC] flex items-center justify-center mx-auto">
                   <CheckCircle2 className="w-6 h-6" />
                 </div>
                 <h4 className="text-lg font-bold text-slate-900">Solicitud Recibida con Éxito</h4>

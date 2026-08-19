@@ -12,11 +12,8 @@ export const AudienceSection: React.FC<AudienceSectionProps> = ({ onOpenBooking 
       <div className="container-corporate">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-6">
-            <div className="flex items-center gap-2 mb-3">
-              <span className="w-2 h-2 rounded-full bg-[#86BC25]"></span>
-              <span className="text-xs font-bold uppercase tracking-widest text-[#0052CC] font-mono">
-                Página 08 · Criterios de Idoneidad
-              </span>
+            <div className="text-xs font-bold uppercase tracking-widest text-[#0052CC] font-mono mb-3">
+              Criterios de Idoneidad
             </div>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#051C2C] tracking-tight leading-tight mb-4">
               ¿Para quién es este piloto?

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Calendar, Clock, Video, CheckCircle2, Shield, ArrowRight } from 'lucide-react';
+import { X, Calendar, Video, CheckCircle2, ArrowRight } from 'lucide-react';
 import { Logo } from './Logo';
 
 interface BookingModalProps {
@@ -25,7 +25,6 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
     e.preventDefault();
     if (!formData.nombre || !formData.email) return;
 
-    // Send lead to backend/HubSpot
     try {
       await fetch('/api/leads/hubspot', {
         method: 'POST',
@@ -33,7 +32,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
         body: JSON.stringify({
           ...formData,
           desafioPrincipal: `Sesión Agendada: ${formData.fecha} a las ${formData.hora} | Notas: ${formData.notas}`,
-          source: 'Modal de Agendamiento Zoom',
+          source: 'Modal de Agendamiento Web',
         }),
       });
     } catch (e) {
@@ -49,20 +48,20 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0A192F]/80 backdrop-blur-sm animate-in fade-in duration-150 font-['Inter']">
-      <div className="bg-white rounded-lg max-w-xl w-full overflow-hidden shadow-2xl border border-slate-200 animate-in zoom-in-95 duration-150">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#051C2C]/80 backdrop-blur-sm animate-in fade-in duration-150 font-['Inter']">
+      <div className="bg-white rounded-xl max-w-xl w-full overflow-hidden shadow-2xl border border-slate-200 animate-in zoom-in-95 duration-150">
         {/* Modal Header */}
-        <div className="bg-[#0A192F] text-white p-5 flex items-center justify-between border-b border-slate-800">
+        <div className="bg-[#0D0D0D] text-white p-5 flex items-center justify-between border-b border-slate-800">
           <div className="flex items-center gap-3">
-            <Logo variant="white-on-dark" size="sm" />
+            <Logo size="sm" />
             <div>
-              <h3 className="text-sm font-bold text-white">Sesión Ejecutiva de Diagnóstico (20 Min)</h3>
-              <p className="text-[11px] text-sky-400 font-mono">Con Manuel Alejandro Salinas Núñez</p>
+              <h3 className="text-sm font-bold text-white">Sesión Ejecutiva de Diagnóstico</h3>
+              <p className="text-[11px] text-[#38BDF8] font-mono">Dirección de Práctica Corporativa</p>
             </div>
           </div>
           <button
             onClick={handleClose}
-            className="text-slate-400 hover:text-white p-1 rounded hover:bg-slate-800 transition-colors"
+            className="text-slate-400 hover:text-white p-1 rounded hover:bg-slate-800 transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -72,20 +71,20 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
         <div className="p-6">
           {scheduled ? (
             <div className="text-center py-6 space-y-4">
-              <div className="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
+              <div className="w-14 h-14 bg-blue-50 text-[#0052CC] rounded-full flex items-center justify-center mx-auto">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
-              <h4 className="text-xl font-bold text-[#0A192F]">Sesión Agendada con Éxito</h4>
+              <h4 className="text-xl font-bold text-[#051C2C]">Sesión Agendada con Éxito</h4>
               <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
                 Hemos reservado la sesión ejecutiva para el{' '}
                 <span className="font-bold text-slate-900">{formData.fecha}</span> a las{' '}
-                <span className="font-bold text-slate-900">{formData.hora}</span>. Hemos enviado la confirmación y enlace
-                de Zoom a <span className="font-bold text-[#004B87]">{formData.email}</span>.
+                <span className="font-bold text-slate-900">{formData.hora}</span>. Hemos enviado los detalles de acceso y
+                confirmación a <span className="font-bold text-[#0052CC]">{formData.email}</span>.
               </p>
               <div className="pt-4 border-t border-slate-100">
                 <button
                   onClick={handleClose}
-                  className="bg-[#0A192F] hover:bg-[#004B87] text-white text-xs font-bold uppercase tracking-wider px-6 py-3 rounded"
+                  className="bg-[#0052CC] hover:bg-[#003E99] text-white text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-md cursor-pointer"
                 >
                   Cerrar ventana
                 </button>
@@ -93,14 +92,14 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
             </div>
           ) : (
             <form onSubmit={handleBookingSubmit} className="space-y-4">
-              <div className="bg-slate-50 border border-slate-200 p-3.5 rounded flex items-center justify-between text-xs text-slate-700">
+              <div className="bg-slate-50 border border-slate-200 p-3.5 rounded-lg flex items-center justify-between text-xs text-slate-700">
                 <div className="flex items-center gap-2">
-                  <Video className="w-4 h-4 text-[#004B87]" />
-                  <span className="font-bold">Videollamada Zoom 1-on-1</span>
+                  <Video className="w-4 h-4 text-[#0052CC]" />
+                  <span className="font-bold">Videollamada Ejecutiva</span>
                 </div>
                 <div className="flex items-center gap-1.5 font-mono text-slate-500">
-                  <Clock className="w-3.5 h-3.5 text-slate-400" />
-                  <span>20 minutos</span>
+                  <Calendar className="w-3.5 h-3.5 text-slate-400" />
+                  <span>Atención Directa</span>
                 </div>
               </div>
 
@@ -203,7 +202,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
                   rows={2}
                   value={formData.notas}
                   onChange={(e) => setFormData({ ...formData, notas: e.target.value })}
-                  placeholder="Ej. Queremos evaluar el piloto para nuestro comité de dirección de 10 personas."
+                  placeholder="Ej. Queremos evaluar el piloto para nuestro comité de dirección."
                   className="consulting-input"
                 />
               </div>
@@ -211,7 +210,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full bg-[#0A192F] hover:bg-[#004B87] text-white text-xs font-bold uppercase tracking-wider py-3.5 rounded transition-all flex items-center justify-center gap-2 shadow-sm"
+                  className="w-full bg-[#0052CC] hover:bg-[#003E99] text-white text-xs font-bold uppercase tracking-wider py-3.5 rounded-lg transition-all flex items-center justify-center gap-2 shadow-sm cursor-pointer"
                 >
                   <span>Confirmar reserva de videollamada</span>
                   <ArrowRight className="w-4 h-4" />

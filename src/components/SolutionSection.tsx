@@ -13,11 +13,8 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking,
       <div className="container-corporate">
         {/* Header */}
         <div className="max-w-3xl mb-16">
-          <div className="flex items-center gap-2 mb-3">
-            <span className="w-2 h-2 rounded-full bg-[#86BC25]"></span>
-            <span className="text-xs font-bold uppercase tracking-widest text-[#0052CC] font-mono">
-              Página 03 · Marco Metodológico
-            </span>
+          <div className="text-xs font-bold uppercase tracking-widest text-[#0052CC] font-mono mb-3">
+            Marco Metodológico
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#051C2C] tracking-tight leading-tight mb-4">
             High-Performance Meetings™
@@ -58,9 +55,8 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking,
           {/* Right Column: Strategic Principle & Architecture */}
           <div className="lg:col-span-5 space-y-6">
             <div className="bg-[#051C2C] text-white p-8 rounded-2xl border border-slate-800 shadow-xl">
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#86BC25] mb-3">
-                <Sparkles className="w-4 h-4 text-[#FFE600]" />
-                <span>Principio de Diseño</span>
+              <div className="text-xs font-bold uppercase tracking-widest text-[#00A3E0] mb-3">
+                Principio de Diseño
               </div>
               <h3 className="text-lg sm:text-xl font-bold text-white mb-4 leading-snug">
                 "El valor de una reunión no se mide por su duración, sino por la calidad de las decisiones y la velocidad de los acuerdos."
@@ -71,15 +67,15 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking,
               </p>
               <div className="pt-4 border-t border-slate-700/80 space-y-2.5 text-xs">
                 <div className="flex items-center gap-2 text-[#38BDF8] font-medium">
-                  <Check className="w-4 h-4 text-[#86BC25]" />
+                  <Check className="w-4 h-4 text-[#00A3E0]" />
                   <span>Enfoque en resultados de negocio verificables.</span>
                 </div>
                 <div className="flex items-center gap-2 text-[#38BDF8] font-medium">
-                  <Check className="w-4 h-4 text-[#86BC25]" />
+                  <Check className="w-4 h-4 text-[#00A3E0]" />
                   <span>Mínima teoría, 100% práctica deliberada.</span>
                 </div>
                 <div className="flex items-center gap-2 text-[#38BDF8] font-medium">
-                  <Check className="w-4 h-4 text-[#86BC25]" />
+                  <Check className="w-4 h-4 text-[#00A3E0]" />
                   <span>Adopción inmediata desde la primera semana.</span>
                 </div>
               </div>

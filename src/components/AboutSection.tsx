@@ -1,6 +1,5 @@
 import React from 'react';
-import { Target, Compass, Users, CheckCircle, Sparkles } from 'lucide-react';
-import { Logo } from './Logo';
+import { Target, Compass, Users } from 'lucide-react';
 
 export const AboutSection: React.FC = () => {
   return (
@@ -8,11 +7,8 @@ export const AboutSection: React.FC = () => {
       <div className="container-corporate">
         {/* Header */}
         <div className="max-w-3xl mb-16">
-          <div className="flex items-center gap-2 mb-3">
-            <span className="w-2 h-2 rounded-full bg-[#86BC25]"></span>
-            <span className="text-xs font-bold uppercase tracking-widest text-[#0052CC] font-mono">
-              Página 07 · Firma Consultora
-            </span>
+          <div className="text-xs font-bold uppercase tracking-widest text-[#0052CC] font-mono mb-3">
+            Firma Consultora
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#051C2C] tracking-tight leading-tight mb-4">
             Sobre Be Corporate
@@ -34,8 +30,8 @@ export const AboutSection: React.FC = () => {
                 referrerPolicy="no-referrer"
               />
               <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-[#051C2C]/95 via-[#051C2C]/70 to-transparent p-6 text-white">
-                <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-[#86BC25] mb-1">
-                  <span>Comité Ejecutivo & Dirección General</span>
+                <div className="text-[10px] font-bold uppercase tracking-widest text-[#38BDF8] mb-1">
+                  Comité Ejecutivo & Dirección General
                 </div>
                 <p className="text-xs text-slate-200 leading-relaxed font-medium">
                   Alineación estratégica y toma de decisiones de alta velocidad en salas de juntas directivas.
