@@ -1,0 +1,6 @@
+{
+  "name": "BE Corporate",
+  "description": "Sistema de Aprendizaje Corporativo. Convertimos la comunicación en una ventaja competitiva.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

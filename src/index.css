@@ -1,0 +1,125 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Work Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  
+  --color-background: oklch(99% 0.003 240);
+  --color-foreground: oklch(20% 0.04 255);
+  --color-card: oklch(100% 0 0);
+  --color-card-foreground: oklch(20% 0.04 255);
+  --color-popover: oklch(100% 0 0);
+  --color-popover-foreground: oklch(20% 0.04 255);
+  --color-primary: oklch(20% 0.04 255);
+  --color-primary-foreground: oklch(99% 0.003 240);
+  --color-secondary: oklch(96% 0.008 250);
+  --color-secondary-foreground: oklch(20% 0.04 255);
+  --color-muted: oklch(96% 0.008 250);
+  --color-muted-foreground: oklch(48% 0.02 255);
+  --color-border: oklch(90% 0.012 250);
+  --color-input: oklch(90% 0.012 250);
+}
+
+:root {
+  --radius: 0.5rem;
+  --background: oklch(99% 0.003 240);
+  --foreground: oklch(20% 0.04 255);
+  --ink: oklch(20% 0.04 255);
+  --paper: oklch(99% 0.003 240);
+  --brand: oklch(58% 0.21 258);
+  --brand-soft: oklch(85% 0.08 255);
+  --card: oklch(100% 0 0);
+  --card-foreground: var(--ink);
+  --popover: oklch(100% 0 0);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--paper);
+  --secondary: oklch(96% 0.008 250);
+  --secondary-foreground: var(--ink);
+  --muted: oklch(96% 0.008 250);
+  --muted-foreground: oklch(48% 0.02 255);
+  --accent: var(--brand);
+  --accent-foreground: oklch(100% 0 0);
+  --destructive: oklch(55% 0.22 27);
+  --destructive-foreground: oklch(98% 0 0);
+  --border: oklch(90% 0.012 250);
+  --input: oklch(90% 0.012 250);
+  --ring: var(--brand);
+
+  --font-sans: "Work Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+.font-display {
+  font-family: var(--font-display), "Instrument Serif", ui-serif, Georgia, serif;
+}
+
+.font-sans {
+  font-family: var(--font-sans), "Work Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+.container-x {
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .container-x {
+    padding-inline: 2.5rem;
+  }
+}
+
+.eyebrow {
+  font-family: var(--font-sans);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+.input {
+  width: 100%;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.7rem 0.9rem;
+  font-size: 0.92rem;
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--brand) 22%, transparent);
+}
+
