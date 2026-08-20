@@ -41,10 +41,7 @@ export const FAQSection: React.FC = () => {
                   onClick={() => toggle(index)}
                   className="w-full p-5 text-left flex justify-between items-center gap-4 hover:bg-slate-50/70 transition-colors cursor-pointer"
                 >
-                  <span className="text-sm sm:text-base font-bold text-[#051C2C] flex items-center gap-3">
-                    <span className="font-mono text-xs text-[#0052CC] font-bold bg-blue-50 px-2 py-0.5 rounded border border-blue-100">
-                      0{index + 1}
-                    </span>
+                  <span className="text-sm sm:text-base font-bold text-[#051C2C]">
                     {item.q}
                   </span>
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors ${
@@ -55,7 +52,7 @@ export const FAQSection: React.FC = () => {
                 </button>
 
                 {isOpen && (
-                  <div className="px-6 pb-6 pt-2 border-t border-slate-100 text-xs sm:text-sm text-slate-600 leading-relaxed pl-14">
+                  <div className="px-5 pb-5 pt-2 border-t border-slate-100 text-xs sm:text-sm text-slate-600 leading-relaxed">
                     {item.a}
                   </div>
                 )}
