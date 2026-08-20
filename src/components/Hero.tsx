@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ArrowRight, Award, Clock, Calendar, Sparkles, TrendingUp, ShieldCheck } from 'lucide-react';
 import { CLIENT_LOGOS } from '../data';
+import heroBoardroomImage from '../assets/images/exact_boardroom_meeting_1787196059786.jpg';
 
 interface HeroProps {
   onOpenBooking: () => void;
@@ -8,6 +9,7 @@ interface HeroProps {
 }
 
 export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onExplorePilot }) => {
+  const [imgSrc, setImgSrc] = useState<string>(heroBoardroomImage || '/assets/hero_striking.jpg');
   return (
     <section id="inicio" className="relative bg-white pt-10 pb-16 lg:pt-14 lg:pb-20 border-b border-slate-200 overflow-hidden font-['Inter']">
       {/* Background Architectural Mesh Grid */}
@@ -97,9 +99,16 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onExplorePilot }) => 
         <div className="relative rounded-2xl overflow-hidden border border-slate-300 shadow-2xl bg-[#051C2C] mb-12 group">
           <div className="relative h-[320px] sm:h-[420px] lg:h-[480px] w-full overflow-hidden">
             <img
-              src="/assets/hero_striking.jpg"
+              src={imgSrc}
+              onError={() => {
+                if (imgSrc !== '/assets/hero_striking.jpg') {
+                  setImgSrc('/assets/hero_striking.jpg');
+                }
+              }}
               alt="Líderes ejecutivos en sesión estratégica en sala de consejo"
               className="w-full h-full object-cover object-center group-hover:scale-[1.01] transition-transform duration-700 ease-out"
+              loading="eager"
+              decoding="async"
               referrerPolicy="no-referrer"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#051C2C] via-[#051C2C]/30 to-transparent" />

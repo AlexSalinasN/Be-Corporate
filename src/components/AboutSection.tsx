@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Target, Compass, Users } from 'lucide-react';
+import ceoMeetingImage from '../assets/images/exact_boardroom_meeting_1787196059786.jpg';
 
 export const AboutSection: React.FC = () => {
+  const [aboutImgSrc, setAboutImgSrc] = useState<string>(ceoMeetingImage || '/assets/ceo_meeting.jpg');
   return (
     <section id="nosotros" className="py-20 lg:py-28 bg-[#F8FAFC] border-b border-slate-200 font-['Inter']">
       <div className="container-corporate">
@@ -24,9 +26,16 @@ export const AboutSection: React.FC = () => {
           <div className="lg:col-span-6">
             <div className="relative rounded-2xl overflow-hidden border border-slate-300 shadow-xl bg-[#051C2C]">
               <img
-                src="/assets/ceo_meeting.jpg"
+                src={aboutImgSrc}
+                onError={() => {
+                  if (aboutImgSrc !== '/assets/ceo_meeting.jpg') {
+                    setAboutImgSrc('/assets/ceo_meeting.jpg');
+                  }
+                }}
                 alt="Director General y Comité C-Level en sesión de alineación estratégica"
                 className="w-full h-[420px] object-cover object-center"
+                loading="lazy"
+                decoding="async"
                 referrerPolicy="no-referrer"
               />
               <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-[#051C2C]/95 via-[#051C2C]/70 to-transparent p-6 text-white">
