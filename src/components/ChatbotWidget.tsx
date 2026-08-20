@@ -9,9 +9,8 @@ interface ChatbotWidgetProps {
 const INITIAL_MESSAGE: ChatMessage = {
   id: '1',
   sender: 'bot',
-  text: '¡Hola! Bienvenido a Be Corporate. Soy tu asesor inteligente en efectividad de reuniones y el programa piloto High-Performance Meetings™. ¿En qué puedo ayudarte hoy?',
+  text: '¡Hola! Bienvenido a Be Corporate. Soy tu asesor en efectividad de reuniones y el programa piloto High-Performance Meetings™. ¿En qué puedo orientarte hoy?',
   timestamp: 'Ahora',
-  sources: ['Be Corporate Strategic Advisory'],
 };
 
 const SUGGESTED_PROMPTS = [
@@ -70,7 +69,6 @@ export const ChatbotWidget: React.FC<ChatbotWidgetProps> = ({ onOpenBooking }) =
         sender: 'bot',
         text: data.response || 'No pudimos generar la respuesta en este momento.',
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        sources: data.sources || ['Be Corporate Strategic Advisory'],
       };
       setMessages((prev) => [...prev, botMsg]);
     } catch (err) {
@@ -84,7 +82,6 @@ Transformamos las reuniones corporativas en ventajas competitivas mediante The B
 
 Para agendar una conversación ejecutiva de diagnóstico, puedes escribir directamente a **contacto@becorporate.mx** o llamar al **55 3581 3240**.`,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        sources: ['Piloto Corporativo Be Corporate'],
       };
       setMessages((prev) => [...prev, fallbackMsg]);
     } finally {
@@ -192,12 +189,6 @@ Para agendar una conversación ejecutiva de diagnóstico, puedes escribir direct
                 >
                   <div className="whitespace-pre-wrap">{msg.text}</div>
 
-                  {msg.sources && msg.sources.length > 0 && (
-                    <div className="mt-2 pt-2 border-t border-slate-100 text-[10px] text-slate-400 font-mono flex items-center gap-1">
-                      <span>Fuente: {msg.sources.join(' · ')}</span>
-                    </div>
-                  )}
-
                   <div
                     className={`text-[9px] mt-1 text-right ${
                       msg.sender === 'user' ? 'text-blue-100' : 'text-slate-400'
@@ -221,7 +212,7 @@ Para agendar una conversación ejecutiva de diagnóstico, puedes escribir direct
                     className="w-2 h-2 rounded-full bg-[#0052CC] animate-bounce"
                     style={{ animationDelay: '0.3s' }}
                   />
-                  <span className="font-mono text-[10px] text-slate-400 ml-1">Consultando base metodológica...</span>
+                  <span className="text-xs text-slate-400 ml-1">Escribiendo...</span>
                 </div>
               </div>
             )}

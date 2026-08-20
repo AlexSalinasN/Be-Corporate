@@ -15,7 +15,6 @@ export interface ChatMessage {
   sender: 'user' | 'bot';
   text: string;
   timestamp: string;
-  sources?: string[];
 }
 
 export interface LeadFormData {
