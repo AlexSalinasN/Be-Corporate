@@ -180,8 +180,8 @@ Para coordinar una sesión de diagnóstico ejecutivo, puede escribir directament
     }
   });
 
-  // API Route: HubSpot Lead Capture & Form Submission
-  app.post("/api/leads/hubspot", async (req: Request, res: Response) => {
+  // API Route: HubSpot Lead Capture & Form Submission (both /api/leads and /api/leads/hubspot)
+  app.post(["/api/leads", "/api/leads/hubspot"], async (req: Request, res: Response) => {
     try {
       const {
         nombre,

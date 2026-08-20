@@ -4,11 +4,13 @@ import { GoogleGenAI } from "@google/genai";
 interface VercelReq extends IncomingMessage {
   body: any;
   method?: string;
+  headers: Record<string, string | string[] | undefined>;
 }
 
 interface VercelRes extends ServerResponse {
   status: (code: number) => VercelRes;
   json: (data: any) => void;
+  setHeader: (name: string, value: string | number | readonly string[]) => this;
 }
 
 const BE_CORPORATE_KNOWLEDGE_BASE = `
@@ -61,25 +63,69 @@ CONTACTO INSTITUCIONAL:
 - Agendamiento: Sesión ejecutiva de diagnóstico.
 `;
 
+async function getParsedBody(req: VercelReq): Promise<any> {
+  if (req.body) {
+    if (typeof req.body === "string") {
+      try {
+        return JSON.parse(req.body);
+      } catch {
+        return {};
+      }
+    }
+    return req.body;
+  }
+
+  return new Promise((resolve) => {
+    let raw = "";
+    req.on("data", (chunk) => {
+      raw += chunk;
+    });
+    req.on("end", () => {
+      try {
+        resolve(raw ? JSON.parse(raw) : {});
+      } catch {
+        resolve({});
+      }
+    });
+    req.on("error", () => resolve({}));
+  });
+}
+
 export default async function handler(req: VercelReq, res: VercelRes) {
+  // CORS Headers
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS,PATCH,DELETE,POST,PUT");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization"
+  );
+
+  if (req.method === "OPTIONS") {
+    return res.status(200).json({ ok: true });
+  }
+
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { message, conversationHistory } = req.body;
-  if (!message) {
-    return res.status(400).json({ error: "Mensaje requerido" });
-  }
-
-  const apiKey = process.env.GEMINI_API_KEY;
-  if (!apiKey) {
-    return res.status(200).json({
-      response: "Gracias por contactar a Be Corporate. High-Performance Meetings™ es nuestro programa piloto de 4 semanas para 8-12 líderes con propuesta a la medida. Para coordinar una sesión ejecutiva con Contacto, escriba a contacto@becorporate.mx o llame al 55 3581 3240.",
-      sources: ["High-Performance Meetings™", "The Be System™"],
-    });
-  }
-
   try {
+    const body = await getParsedBody(req);
+    const { message, conversationHistory } = body;
+
+    if (!message) {
+      return res.status(400).json({ error: "Mensaje requerido" });
+    }
+
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey) {
+      return res.status(200).json({
+        response:
+          "Gracias por contactar a Be Corporate. High-Performance Meetings™ es nuestro programa piloto de 4 semanas para 8-12 líderes con propuesta a la medida. Para coordinar una sesión ejecutiva de diagnóstico con Contacto, escriba a contacto@becorporate.mx o comuníquese al 55 3581 3240.",
+        sources: ["High-Performance Meetings™", "The Be System™"],
+      });
+    }
+
     const ai = new GoogleGenAI({
       apiKey,
       httpOptions: { headers: { "User-Agent": "aistudio-build" } },
@@ -111,6 +157,10 @@ export default async function handler(req: VercelReq, res: VercelRes) {
       sources: ["High-Performance Meetings™", "The Be System™"],
     });
   } catch (error: any) {
-    return res.status(500).json({ error: "Error en asistente virtual", details: error?.message });
+    console.error("Vercel /api/chat error:", error);
+    return res.status(500).json({
+      error: "Error en asistente virtual",
+      details: error?.message,
+    });
   }
 }

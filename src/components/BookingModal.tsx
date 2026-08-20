@@ -9,12 +9,18 @@ interface BookingModalProps {
 
 export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) => {
   const [scheduled, setScheduled] = useState(false);
+  const getInitialDate = () => {
+    const d = new Date();
+    d.setDate(d.getDate() + 2);
+    return d.toISOString().split('T')[0];
+  };
+
   const [formData, setFormData] = useState({
     nombre: '',
     email: '',
     empresa: '',
     telefono: '',
-    fecha: '2026-08-25',
+    fecha: getInitialDate(),
     hora: '10:00 AM',
     notas: '',
   });
