@@ -116,11 +116,10 @@ Para agendar una conversación ejecutiva de diagnóstico, puedes escribir direct
             </div>
 
             {/* Hover Expanded 'Necesito Ayuda' Button */}
-            <div className="max-w-0 opacity-0 group-hover:max-w-[140px] group-hover:opacity-100 group-hover:pl-2.5 group-hover:pr-3.5 transition-all duration-300 ease-out overflow-hidden whitespace-nowrap flex items-center gap-1.5">
+            <div className="max-w-0 opacity-0 group-hover:max-w-[140px] group-hover:opacity-100 group-hover:pl-2.5 group-hover:pr-4 transition-all duration-300 ease-out overflow-hidden whitespace-nowrap flex items-center">
               <span className="text-xs sm:text-[13px] font-bold text-white tracking-tight">
                 Necesito Ayuda
               </span>
-              <Sparkles className="w-3 h-3 text-[#38BDF8] shrink-0" />
             </div>
           </button>
         )}
