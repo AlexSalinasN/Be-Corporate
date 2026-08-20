@@ -56,7 +56,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
             <Logo size="sm" />
             <div>
               <h3 className="text-sm font-bold text-white">Sesión Ejecutiva de Diagnóstico</h3>
-              <p className="text-[11px] text-[#38BDF8] font-mono">Dirección de Práctica Corporativa</p>
+              <p className="text-[11px] text-[#38BDF8] font-mono">Contacto Corporativo</p>
             </div>
           </div>
           <button

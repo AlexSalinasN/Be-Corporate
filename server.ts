@@ -76,8 +76,8 @@ PERFIL DE EQUIPOS IDÓNEOS:
 - Empresas en procesos de crecimiento acelerado, reestructuración o integración post-fusión.
 - Organizaciones con alta carga de reuniones que buscan eficientar su operación.
 
-CONTACTO Y DIRECCIÓN INSTITUCIONAL:
-- Área: Dirección de Práctica Corporativa · Be Corporate Strategic Advisory.
+CONTACTO INSTITUCIONAL:
+- Área: Contacto · Be Corporate Strategic Advisory.
 - Correo: contacto@becorporate.mx
 - Teléfono / WhatsApp: 55 3581 3240
 - Agendamiento: Sesión ejecutiva de diagnóstico para evaluar la idoneidad del piloto corporativo.
@@ -85,7 +85,7 @@ CONTACTO Y DIRECCIÓN INSTITUCIONAL:
 PAUTAS DE RESPUESTA:
 - Responde siempre en español fluido, formal, ejecutivo y cordial.
 - Brinda respuestas claras, estructuradas y precisas.
-- Si el usuario muestra interés en implementar el piloto o agendar, invítalo a programar la sesión ejecutiva de diagnóstico con la Dirección de Práctica de Be Corporate o a dejar sus datos en el formulario de contacto.
+- Si el usuario muestra interés en implementar el piloto o agendar, invítalo a programar la sesión ejecutiva de diagnóstico con Contacto de Be Corporate o a dejar sus datos en el formulario de contacto.
 `;
 
 let genAIClient: GoogleGenAI | null = null;
@@ -135,7 +135,7 @@ async function startServer() {
 
 High-Performance Meetings™ es nuestro programa piloto de 4 semanas diseñado para equipos de 8 a 12 líderes con una propuesta adaptada a su organización. 
 
-Para coordinar una sesión de diagnóstico ejecutivo, puede escribir directamente a la Dirección de Práctica a **contacto@becorporate.mx** o al teléfono **55 3581 3240**.`,
+Para coordinar una sesión de diagnóstico ejecutivo, puede escribir directamente a Contacto a **contacto@becorporate.mx** o al teléfono **55 3581 3240**.`,
           sources: ["Programa Piloto High-Performance Meetings™", "The Be System™"],
         });
       }

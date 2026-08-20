@@ -56,8 +56,8 @@ EL PROGRAMA PILOTO CORPORATIVO (High-Performance Meetings™):
 - Inversión: Propuesta personalizada según la escala y necesidades de la organización.
 - 7 Entregables: Diagnóstico inicial, 4 sesiones de desarrollo, kit de herramientas/plantillas, protocolos personalizados, sesiones de feedback sobre reuniones reales, evaluación de adopción, reporte ejecutivo de resultados.
 
-CONTACTO Y DIRECCIÓN:
-- Dirección de Práctica Corporativa (contacto@becorporate.mx | Tel: 55 3581 3240).
+CONTACTO INSTITUCIONAL:
+- Contacto (contacto@becorporate.mx | Tel: 55 3581 3240).
 - Agendamiento: Sesión ejecutiva de diagnóstico.
 `;
 
@@ -74,7 +74,7 @@ export default async function handler(req: VercelReq, res: VercelRes) {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
     return res.status(200).json({
-      response: "Gracias por contactar a Be Corporate. High-Performance Meetings™ es nuestro programa piloto de 4 semanas para 8-12 líderes con propuesta a la medida. Para coordinar una sesión ejecutiva con la Dirección de Práctica, escriba a contacto@becorporate.mx o llame al 55 3581 3240.",
+      response: "Gracias por contactar a Be Corporate. High-Performance Meetings™ es nuestro programa piloto de 4 semanas para 8-12 líderes con propuesta a la medida. Para coordinar una sesión ejecutiva con Contacto, escriba a contacto@becorporate.mx o llame al 55 3581 3240.",
       sources: ["High-Performance Meetings™", "The Be System™"],
     });
   }

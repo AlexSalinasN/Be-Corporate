@@ -42,7 +42,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenBooking })
         setStatus('success');
         setStatusMessage(
           data.details ||
-            'Su solicitud ha sido recibida. La Dirección de Práctica de Be Corporate se pondrá en contacto en menos de 24 horas hábiles.'
+            'Su solicitud ha sido recibida. El equipo de Contacto de Be Corporate se comunicará en menos de 24 horas hábiles.'
         );
         setFormData({
           nombre: '',
@@ -60,7 +60,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenBooking })
       console.warn('Form submission fallback:', err);
       setStatus('success');
       setStatusMessage(
-        'Su información ha sido registrada exitosamente. La Dirección de Práctica de Be Corporate le contactará a la brevedad.'
+        'Su información ha sido registrada exitosamente. El equipo de Contacto de Be Corporate le contactará a la brevedad.'
       );
     }
   };
@@ -69,17 +69,17 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenBooking })
     <section id="contacto" className="py-20 lg:py-28 bg-white font-['Inter']">
       <div className="container-corporate">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          {/* Left Column: Practice Leadership Contact */}
+          {/* Left Column: Contact Details */}
           <div className="lg:col-span-5 space-y-8">
             <div>
               <div className="text-xs font-bold uppercase tracking-widest text-[#0052CC] font-mono mb-3">
-                Dirección Institucional
+                Contacto Directo
               </div>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#051C2C] tracking-tight leading-tight mb-4">
                 Iniciemos la conversación
               </h2>
               <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
-                Coordine directamente con la Dirección de Práctica de Be Corporate para evaluar la idoneidad del piloto en su
+                Coordine directamente con Contacto de Be Corporate para evaluar la idoneidad del piloto en su
                 organización.
               </p>
             </div>
@@ -91,7 +91,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenBooking })
                   <Building2 className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-base font-extrabold text-white">Dirección de Práctica</h3>
+                  <h3 className="text-base font-extrabold text-white">Contacto</h3>
                   <p className="text-xs text-[#38BDF8] font-medium">Be Corporate Strategic Advisory</p>
                 </div>
               </div>
@@ -138,16 +138,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenBooking })
 
           {/* Right Column: HubSpot Lead Capture Form */}
           <div className="lg:col-span-7 bg-[#F8FAFC] border border-slate-200 p-8 rounded-2xl shadow-sm">
-            <div className="flex items-center justify-between border-b border-slate-200 pb-4 mb-6">
-              <div>
-                <h3 className="text-lg font-extrabold text-[#051C2C]">Solicitud de Diagnóstico para Piloto</h3>
-                <p className="text-xs text-slate-500">
-                  Complete los datos de su equipo para recibir la propuesta ejecutiva
-                </p>
-              </div>
-              <span className="text-[11px] font-mono font-bold text-[#0052CC] bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
-                HubSpot Form Ready
-              </span>
+            <div className="border-b border-slate-200 pb-4 mb-6">
+              <h3 className="text-lg font-extrabold text-[#051C2C]">Solicitud de Diagnóstico para Piloto</h3>
+              <p className="text-xs text-slate-500">
+                Complete los datos de su equipo para recibir la propuesta ejecutiva
+              </p>
             </div>
 
             {status === 'success' ? (

@@ -74,7 +74,7 @@ export const Footer: React.FC = () => {
             <h4 className="text-xs font-bold uppercase tracking-widest text-white">Contacto Directivo</h4>
             <div className="space-y-2.5 text-xs text-slate-300">
               <div>
-                <span className="font-bold text-white block">Dirección de Práctica</span>
+                <span className="font-bold text-white block">Contacto</span>
                 <span className="text-[11px] text-slate-400">Be Corporate Strategic Advisory</span>
               </div>
               <div className="flex items-center gap-2">

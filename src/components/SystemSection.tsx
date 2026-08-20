@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layers, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { THE_BE_SYSTEM_STAGES } from '../data';
 
 interface SystemSectionProps {
@@ -30,7 +30,7 @@ export const SystemSection: React.FC<SystemSectionProps> = ({ onExplorePilot }) 
           </p>
         </div>
 
-        {/* 5 Elements Pipeline without numbers */}
+        {/* 5 Elements Pipeline without icons / isotopos or numbers */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-16">
           {THE_BE_SYSTEM_STAGES.map((stage) => (
             <div
@@ -38,12 +38,7 @@ export const SystemSection: React.FC<SystemSectionProps> = ({ onExplorePilot }) 
               className="bg-[#0B253A] border border-slate-700/80 hover:border-[#38BDF8] p-6 rounded-xl transition-all duration-300 flex flex-col justify-between group shadow-md hover:shadow-xl"
             >
               <div>
-                <div className="flex items-center justify-between mb-4">
-                  <div className="w-8 h-8 rounded-lg bg-blue-950/60 border border-blue-800/40 flex items-center justify-center text-[#38BDF8]">
-                    <Layers className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                  </div>
-                </div>
-                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-[#38BDF8] transition-colors">
+                <h3 className="text-lg font-bold text-white mb-3 group-hover:text-[#38BDF8] transition-colors">
                   {stage.name}
                 </h3>
                 <p className="text-xs text-slate-300 leading-relaxed mb-4">{stage.desc}</p>
