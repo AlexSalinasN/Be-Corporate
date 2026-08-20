@@ -50,10 +50,10 @@ export const Header: React.FC<HeaderProps> = ({
         {/* LOGO: Clean executive framing */}
         <button
           onClick={() => handleNavClick('inicio')}
-          className="flex items-center group cursor-pointer focus:outline-none shrink-0"
+          className="flex items-center group cursor-pointer focus:outline-none shrink-0 py-0.5"
           aria-label="Ir a inicio de Be Corporate"
         >
-          <Logo size="md" className="h-9 sm:h-10 w-auto" />
+          <Logo size="lg" className="h-11 sm:h-12 lg:h-[50px] w-auto" />
         </button>
 
         {/* Desktop Navigation Links - Balanced spacing, no crowding */}

@@ -13,8 +13,8 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-slate-800">
           {/* Col 1: Brand & Positioning */}
           <div className="lg:col-span-5 space-y-4">
-            <div className="flex items-center gap-3">
-              <Logo size="lg" />
+            <div className="flex items-center">
+              <Logo size="xl" className="h-14 sm:h-16 lg:h-18 w-auto" />
             </div>
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-md">
               Communication Beyond Language · Communication That Drives Business. Ayudamos a líderes y equipos directivos a
