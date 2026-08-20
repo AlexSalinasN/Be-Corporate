@@ -27,7 +27,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenBooking })
     setStatus('loading');
 
     try {
-      const res = await fetch('/api/leads/hubspot', {
+      const res = await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -136,7 +136,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenBooking })
             </div>
           </div>
 
-          {/* Right Column: HubSpot Lead Capture Form */}
+          {/* Right Column: Executive Lead Capture Form */}
           <div className="lg:col-span-7 bg-[#F8FAFC] border border-slate-200 p-8 rounded-2xl shadow-sm">
             <div className="border-b border-slate-200 pb-4 mb-6">
               <h3 className="text-lg font-extrabold text-[#051C2C]">Solicitud de Diagnóstico para Piloto</h3>

@@ -180,7 +180,7 @@ Para coordinar una sesión de diagnóstico ejecutivo, puede escribir directament
     }
   });
 
-  // API Route: HubSpot Lead Capture & Form Submission (both /api/leads and /api/leads/hubspot)
+  // API Route: Lead Capture & Form Submission (both /api/leads and /api/leads/hubspot)
   app.post(["/api/leads", "/api/leads/hubspot"], async (req: Request, res: Response) => {
     try {
       const {
@@ -205,10 +205,17 @@ Para coordinar una sesión de diagnóstico ejecutivo, puede escribir directament
       const formId = process.env.HUBSPOT_FORM_ID;
       const accessToken = process.env.HUBSPOT_ACCESS_TOKEN;
 
-      let hubspotSuccess = false;
-      let integrationDetails = "";
+      let crmSuccess = false;
 
-      // 1. If HubSpot Form ID and Portal ID are provided, use HubSpot Forms API v3
+      const formattedNotes = `[Registro Be Corporate]
+- Principal desafío de comunicación en reuniones: ${desafioPrincipal || "No especificado"}
+- Tamaño de cohorte: ${participantes || "8 a 12 participantes"}
+- Rol del cliente que se registra: ${cargo || "No especificado"}
+- Empresa: ${empresa || "No especificada"}
+- Teléfono: ${telefono || "No proporcionado"}
+- Origen: ${source}`;
+
+      // 1. If Form ID and Portal ID are provided, submit directly
       if (portalId && formId) {
         try {
           const hsPayload = {
@@ -218,7 +225,7 @@ Para coordinar una sesión de diagnóstico ejecutivo, puede escribir directament
               { objectTypeId: "0-1", name: "company", value: empresa || "" },
               { objectTypeId: "0-1", name: "jobtitle", value: cargo || "" },
               { objectTypeId: "0-1", name: "phone", value: telefono || "" },
-              { objectTypeId: "0-1", name: "message", value: `Participantes: ${participantes || "8 a 12"} | Desafío: ${desafioPrincipal || "General"}` },
+              { objectTypeId: "0-1", name: "message", value: formattedNotes },
             ],
             context: {
               pageUri: "https://becorporate.mx",
@@ -236,16 +243,15 @@ Para coordinar una sesión de diagnóstico ejecutivo, puede escribir directament
           );
 
           if (hsRes.ok) {
-            hubspotSuccess = true;
-            integrationDetails = "Enviado exitosamente a formulario de HubSpot.";
+            crmSuccess = true;
           }
         } catch (hsErr) {
-          console.warn("HubSpot Form API submit error:", hsErr);
+          console.warn("CRM Form submit error:", hsErr);
         }
       }
 
-      // 2. Alternatively, if HubSpot Private App Access Token is provided, create CRM contact
-      if (!hubspotSuccess && accessToken) {
+      // 2. Alternatively, if Access Token is provided, create CRM contact
+      if (!crmSuccess && accessToken) {
         try {
           const crmRes = await fetch("https://api.hubapi.com/crm/v3/objects/contacts", {
             method: "POST",
@@ -261,17 +267,16 @@ Para coordinar una sesión de diagnóstico ejecutivo, puede escribir directament
                 jobtitle: cargo || "",
                 phone: telefono || "",
                 hs_lead_status: "NEW",
-                message: `Desafío: ${desafioPrincipal || "General"} | Participantes: ${participantes || "8 a 12"}`,
+                message: formattedNotes,
               },
             }),
           });
 
           if (crmRes.ok) {
-            hubspotSuccess = true;
-            integrationDetails = "Contacto registrado exitosamente en CRM de HubSpot.";
+            crmSuccess = true;
           }
         } catch (crmErr) {
-          console.warn("HubSpot CRM API error:", crmErr);
+          console.warn("CRM API error:", crmErr);
         }
       }
 
@@ -286,16 +291,15 @@ Para coordinar una sesión de diagnóstico ejecutivo, puede escribir directament
         participantes,
         desafioPrincipal,
         source,
-        hubspotSynced: hubspotSuccess,
+        synced: crmSuccess,
       });
 
       return res.json({
         success: true,
         message: "Información recibida correctamente. Nos comunicaremos a la brevedad.",
-        hubspotSynced: hubspotSuccess,
-        details: hubspotSuccess
-          ? integrationDetails
-          : "Información procesada y guardada en el sistema corporativo de Be Corporate.",
+        synced: crmSuccess,
+        details:
+          "Su solicitud ha sido registrada exitosamente. El equipo directivo de Be Corporate se comunicará en menos de 24 horas hábiles.",
       });
     } catch (err: any) {
       console.error("Error handling lead submission:", err);

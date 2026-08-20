@@ -19,6 +19,9 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
     nombre: '',
     email: '',
     empresa: '',
+    cargo: '',
+    participantes: '8 a 12 participantes (1 cohorte)',
+    desafioPrincipal: 'Decisiones lentas y acuerdos sin seguimiento claro',
     telefono: '',
     fecha: getInitialDate(),
     hora: '10:00 AM',
@@ -32,12 +35,17 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
     if (!formData.nombre || !formData.email) return;
 
     try {
-      await fetch('/api/leads/hubspot', {
+      await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ...formData,
-          desafioPrincipal: `Sesión Agendada: ${formData.fecha} a las ${formData.hora} | Notas: ${formData.notas}`,
+          nombre: formData.nombre,
+          email: formData.email,
+          empresa: formData.empresa,
+          cargo: formData.cargo,
+          telefono: formData.telefono,
+          participantes: formData.participantes,
+          desafioPrincipal: `Sesión Agendada: ${formData.fecha} a las ${formData.hora} | Desafío: ${formData.desafioPrincipal} | Notas adicionales: ${formData.notas || "Ninguna"}`,
           source: 'Modal de Agendamiento Web',
         }),
       });
@@ -156,6 +164,22 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
 
                 <div>
                   <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1">
+                    Rol / Cargo del solicitante *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.cargo}
+                    onChange={(e) => setFormData({ ...formData, cargo: e.target.value })}
+                    placeholder="Ej. CEO, Director de Área, VP"
+                    className="consulting-input"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div>
+                  <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1">
                     Teléfono / WhatsApp
                   </label>
                   <input
@@ -166,6 +190,47 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
                     className="consulting-input"
                   />
                 </div>
+
+                <div>
+                  <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1">
+                    Tamaño de cohorte estimado
+                  </label>
+                  <select
+                    value={formData.participantes}
+                    onChange={(e) => setFormData({ ...formData, participantes: e.target.value })}
+                    className="consulting-input bg-white"
+                  >
+                    <option value="8 a 12 participantes (1 cohorte)">8 a 12 participantes (1 cohorte)</option>
+                    <option value="13 a 25 participantes (2 cohortes)">13 a 25 participantes (2 cohortes)</option>
+                    <option value="Comité Ejecutivo C-Level">Comité Ejecutivo C-Level</option>
+                    <option value="Despliegue Organizacional (+30)">Despliegue Organizacional (+30)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1">
+                  Principal desafío de comunicación en reuniones
+                </label>
+                <select
+                  value={formData.desafioPrincipal}
+                  onChange={(e) => setFormData({ ...formData, desafioPrincipal: e.target.value })}
+                  className="consulting-input bg-white"
+                >
+                  <option value="Decisiones lentas y acuerdos sin seguimiento claro">
+                    Decisiones lentas y acuerdos sin seguimiento claro
+                  </option>
+                  <option value="Exceso de juntas y falta de síntesis ejecutiva">
+                    Exceso de juntas y falta de síntesis ejecutiva
+                  </option>
+                  <option value="Desalineación entre áreas operativas y liderazgo">
+                    Desalineación entre áreas operativas y liderazgo
+                  </option>
+                  <option value="Conversaciones circulares sin responsables definidos">
+                    Conversaciones circulares sin responsables definidos
+                  </option>
+                  <option value="Otro desafío específico">Otro desafío específico</option>
+                </select>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">

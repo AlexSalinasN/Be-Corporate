@@ -86,7 +86,7 @@ export default async function handler(req: VercelReq, res: VercelRes) {
     let hubspotSuccess = false;
     let syncMethod = "local";
 
-    // 1. HubSpot Forms API v3 (Direct form submission)
+    // 1. CRM Forms API v3 (Direct form submission)
     if (portalId && formId) {
       try {
         const hsPayload = {
@@ -99,7 +99,13 @@ export default async function handler(req: VercelReq, res: VercelRes) {
             {
               objectTypeId: "0-1",
               name: "message",
-              value: `[Be Corporate Lead] Desafío: ${desafioPrincipal} | Participantes: ${participantes} | Origen: ${source}`,
+              value: `[Registro Be Corporate]
+- Principal desafío de comunicación en reuniones: ${desafioPrincipal}
+- Tamaño de cohorte: ${participantes}
+- Rol del cliente que se registra: ${cargo || "No especificado"}
+- Empresa: ${empresa || "No especificada"}
+- Teléfono: ${telefono || "No proporcionado"}
+- Origen: ${source}`,
             },
           ],
           context: {
@@ -119,14 +125,14 @@ export default async function handler(req: VercelReq, res: VercelRes) {
 
         if (hsRes.ok) {
           hubspotSuccess = true;
-          syncMethod = "hubspot_forms_v3";
+          syncMethod = "secure_crm_v3";
         }
       } catch (hsErr) {
-        console.warn("HubSpot Form API Error:", hsErr);
+        console.warn("CRM Form API Error:", hsErr);
       }
     }
 
-    // 2. HubSpot CRM Contacts API v3 (Private App Token)
+    // 2. CRM Contacts API v3 (Private App Token)
     if (!hubspotSuccess && accessToken) {
       try {
         const crmRes = await fetch("https://api.hubapi.com/crm/v3/objects/contacts", {
@@ -143,28 +149,32 @@ export default async function handler(req: VercelReq, res: VercelRes) {
               jobtitle: cargo,
               phone: telefono,
               hs_lead_status: "NEW",
-              message: `[Be Corporate Lead] Desafío: ${desafioPrincipal} | Participantes: ${participantes} | Origen: ${source}`,
+              message: `[Registro Be Corporate]
+- Principal desafío de comunicación en reuniones: ${desafioPrincipal}
+- Tamaño de cohorte: ${participantes}
+- Rol del cliente que se registra: ${cargo || "No especificado"}
+- Empresa: ${empresa || "No especificada"}
+- Teléfono: ${telefono || "No proporcionado"}
+- Origen: ${source}`,
             },
           }),
         });
 
         if (crmRes.ok) {
           hubspotSuccess = true;
-          syncMethod = "hubspot_crm_contacts_v3";
+          syncMethod = "secure_crm_v3";
         }
       } catch (crmErr) {
-        console.warn("HubSpot CRM API Error:", crmErr);
+        console.warn("CRM Contacts API Error:", crmErr);
       }
     }
 
     return res.status(200).json({
       success: true,
       message: "Solicitud registrada exitosamente.",
-      hubspotSynced: hubspotSuccess,
-      syncMethod,
-      details: hubspotSuccess
-        ? "Datos sincronizados exitosamente con HubSpot."
-        : "Datos registrados en el sistema de gestión de Be Corporate.",
+      synced: hubspotSuccess,
+      details:
+        "Su información ha sido registrada exitosamente. El equipo de Contacto de Be Corporate se comunicará en menos de 24 horas hábiles.",
     });
   } catch (err: any) {
     console.error("Lead Handler Error:", err);

@@ -18,9 +18,9 @@ export default function handler(req: VercelReq, res: VercelRes) {
     timestamp: new Date().toISOString(),
     env: {
       hasGeminiKey: Boolean(process.env.GEMINI_API_KEY),
-      hasHubSpotPortal: Boolean(process.env.HUBSPOT_PORTAL_ID),
-      hasHubSpotForm: Boolean(process.env.HUBSPOT_FORM_ID),
-      hasHubSpotToken: Boolean(process.env.HUBSPOT_ACCESS_TOKEN),
+      hasCrmPortal: Boolean(process.env.HUBSPOT_PORTAL_ID),
+      hasCrmForm: Boolean(process.env.HUBSPOT_FORM_ID),
+      hasCrmToken: Boolean(process.env.HUBSPOT_ACCESS_TOKEN),
     },
   });
 }
