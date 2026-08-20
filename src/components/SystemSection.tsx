@@ -65,7 +65,7 @@ export const SystemSection: React.FC<SystemSectionProps> = ({ onExplorePilot }) 
             </h4>
             <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
               No simulamos escenarios hipotéticos. Aplicamos las herramientas directamente en las juntas de planeación,
-              comités y revisiones de negocio de su propia organización.
+              comités y revisiones de negocio de tu propia organización.
             </p>
           </div>
           {onExplorePilot && (

@@ -15,7 +15,7 @@ Tu tono es ejecutivo, profesional, sobrio, analítico, directo y fundamentado, a
 INFORMACIÓN INSTITUCIONAL DE BE CORPORATE:
 - Nombre: Be Corporate (siempre escribe "Be Corporate").
 - Slogan / Propósito: "Communication Beyond Language" · "Communication That Drives Business."
-- Propuesta de valor: Convierta sus reuniones en una ventaja competitiva. Ayudamos a líderes y equipos a transformar sus reuniones en conversaciones más claras, decisiones mejor definidas y compromisos que se convierten en acciones.
+- Propuesta de valor: Convierte tus reuniones en una ventaja competitiva. Ayudamos a líderes y equipos a transformar sus reuniones en conversaciones más claras, decisiones mejor definidas y compromisos que se convierten en acciones.
 
 EL DESAFÍO (Diagnóstico):
 - El problema no son las reuniones; es la ausencia de una capacidad compartida para convertirlas en resultados.
@@ -83,7 +83,8 @@ CONTACTO INSTITUCIONAL:
 - Agendamiento: Sesión ejecutiva de diagnóstico para evaluar la idoneidad del piloto corporativo.
 
 PAUTAS DE RESPUESTA:
-- Responde siempre en español fluido, formal, ejecutivo y cordial.
+- Responde siempre en español fluido, profesional, cercano, empático y sobrio.
+- REGLA DE TRATO: HÁBLALE SIEMPRE DE "TÚ" AL USUARIO (usa "tú", "tu equipo", "tus reuniones", "te ayudamos", "puedes agendar"). NUNCA le hables de "usted".
 - Brinda respuestas claras, estructuradas y precisas.
 - Si el usuario muestra interés en implementar el piloto o agendar, invítalo a programar la sesión ejecutiva de diagnóstico con Contacto de Be Corporate o a dejar sus datos en el formulario de contacto.
 `;
@@ -133,9 +134,9 @@ async function startServer() {
         return res.json({
           response: `Gracias por contactar a Be Corporate. Actualmente nuestro asesor inteligente está en modo demostración. 
 
-High-Performance Meetings™ es nuestro programa piloto de 4 semanas diseñado para equipos de 8 a 12 líderes con una propuesta adaptada a su organización. 
+High-Performance Meetings™ es nuestro programa piloto de 4 semanas diseñado para equipos de 8 a 12 líderes con una propuesta adaptada a tu organización. 
 
-Para coordinar una sesión de diagnóstico ejecutivo, puede escribir directamente a Contacto a **contacto@becorporate.mx** o al teléfono **55 3581 3240**.`,
+Para coordinar una sesión de diagnóstico ejecutivo, puedes escribir directamente a Contacto a **contacto@becorporate.mx** o al teléfono **55 3581 3240**.`,
           sources: ["Programa Piloto High-Performance Meetings™", "The Be System™"],
         });
       }

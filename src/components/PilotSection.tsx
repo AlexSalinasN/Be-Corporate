@@ -93,7 +93,7 @@ export const PilotSection: React.FC<PilotSectionProps> = ({ onOpenBooking }) => 
             {/* Note on enterprise alignment */}
             <div className="mt-8 p-4 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-600 leading-relaxed">
               <span className="font-bold text-[#051C2C]">Alcance Institucional: </span>
-              Propuesta adaptada a la escala y objetivos de su organización. Incluye diagnóstico inicial, facilitación
+              Propuesta adaptada a la escala y objetivos de tu organización. Incluye diagnóstico inicial, facilitación
               ejecutiva, materiales de trabajo y reporte final de resultados.
             </div>
           </div>

@@ -9,7 +9,7 @@ interface ChatbotWidgetProps {
 const INITIAL_MESSAGE: ChatMessage = {
   id: '1',
   sender: 'bot',
-  text: 'Bienvenido a Be Corporate. Soy su asesor inteligente sobre efectividad en reuniones y el programa piloto High-Performance Meetings™. ¿En qué puedo orientarle hoy?',
+  text: '¡Hola! Bienvenido a Be Corporate. Soy tu asesor inteligente en efectividad de reuniones y el programa piloto High-Performance Meetings™. ¿En qué puedo ayudarte hoy?',
   timestamp: 'Ahora',
   sources: ['Be Corporate Strategic Advisory'],
 };
@@ -78,11 +78,11 @@ export const ChatbotWidget: React.FC<ChatbotWidgetProps> = ({ onOpenBooking }) =
       const fallbackMsg: ChatMessage = {
         id: (Date.now() + 1).toString(),
         sender: 'bot',
-        text: `High-Performance Meetings™ es nuestro programa piloto de 4 semanas estructurado en 12 horas de formación aplicada para cohortes de 8 a 12 participantes con propuesta a la medida de su empresa.
+        text: `High-Performance Meetings™ es nuestro programa piloto de 4 semanas estructurado en 12 horas de formación aplicada para cohortes de 8 a 12 participantes con propuesta a la medida de tu empresa.
 
 Transformamos las reuniones corporativas en ventajas competitivas mediante The Be System™ (Discover, Design, Develop, Apply, Grow).
 
-Para agendar una conversación ejecutiva de diagnóstico, puede escribir directamente a **contacto@becorporate.mx** o llamar al **55 3581 3240**.`,
+Para agendar una conversación ejecutiva de diagnóstico, puedes escribir directamente a **contacto@becorporate.mx** o llamar al **55 3581 3240**.`,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         sources: ['Piloto Corporativo Be Corporate'],
       };
@@ -98,24 +98,29 @@ Para agendar una conversación ejecutiva de diagnóstico, puede escribir directa
 
   return (
     <>
-      {/* Floating Launcher Button */}
+      {/* Floating Launcher Button - Reduced to Avatar, expands 'Necesito Ayuda' on hover */}
       <div className="fixed bottom-6 right-6 z-40">
         {!isOpen && (
           <button
             onClick={() => setIsOpen(true)}
-            className="group relative flex items-center gap-3 bg-[#0D0D0D] hover:bg-[#1E293B] text-white pl-4 pr-5 py-3.5 rounded-full shadow-2xl transition-all duration-200 hover:scale-[1.02] border border-slate-700/60 cursor-pointer"
-            aria-label="Abrir Asesor Inteligente Be Corporate"
+            className="group relative flex items-center bg-[#0D0D0D] hover:bg-[#0052CC] text-white p-2 rounded-full shadow-2xl transition-all duration-300 ease-out border border-slate-700/80 hover:border-[#00A3E0] cursor-pointer hover:shadow-[0_10px_25px_rgba(0,82,204,0.35)]"
+            aria-label="Necesito Ayuda - Abrir asesor Be Corporate"
           >
-            <div className="relative flex items-center justify-center w-8 h-8 rounded-full bg-[#0052CC] text-white">
-              <Bot className="w-4 h-4" />
-              <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
+            {/* Avatar Circle */}
+            <div className="relative flex items-center justify-center w-11 h-11 rounded-full bg-[#0052CC] group-hover:bg-[#003E99] text-white shrink-0 transition-colors shadow-xs">
+              <Bot className="w-5 h-5" />
+              <span className="absolute -top-0.5 -right-0.5 flex h-2.5 w-2.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#38BDF8] opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#00A3E0]"></span>
               </span>
             </div>
-            <div className="text-left">
-              <div className="text-xs font-extrabold uppercase tracking-wider text-[#38BDF8]">Asesor IA</div>
-              <div className="text-sm font-semibold text-white tracking-tight">Preguntar sobre el Piloto</div>
+
+            {/* Hover Expanded 'Necesito Ayuda' Button */}
+            <div className="max-w-0 opacity-0 group-hover:max-w-[140px] group-hover:opacity-100 group-hover:pl-2.5 group-hover:pr-3.5 transition-all duration-300 ease-out overflow-hidden whitespace-nowrap flex items-center gap-1.5">
+              <span className="text-xs sm:text-[13px] font-bold text-white tracking-tight">
+                Necesito Ayuda
+              </span>
+              <Sparkles className="w-3 h-3 text-[#38BDF8] shrink-0" />
             </div>
           </button>
         )}
@@ -135,7 +140,7 @@ Para agendar una conversación ejecutiva de diagnóstico, puede escribir directa
                   <span className="font-bold text-sm text-white">Be Corporate Advisor AI</span>
                   <span className="inline-block w-2 h-2 rounded-full bg-[#00A3E0]"></span>
                 </div>
-                <div className="text-[11px] text-slate-400 font-medium">Asesoría en Efectividad y Piloto</div>
+                <div className="text-[11px] text-slate-400 font-medium">Asesoría</div>
               </div>
             </div>
             <div className="flex items-center gap-1">
@@ -256,7 +261,7 @@ Para agendar una conversación ejecutiva de diagnóstico, puede escribir directa
               type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              placeholder="Escriba su consulta sobre el piloto..."
+              placeholder="Escribe tu consulta sobre el piloto..."
               disabled={isLoading}
               className="flex-1 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-md px-3 py-2.5 focus:outline-none focus:ring-1 focus:ring-[#0052CC] focus:bg-white text-slate-800"
             />

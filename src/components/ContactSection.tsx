@@ -42,7 +42,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenBooking })
         setStatus('success');
         setStatusMessage(
           data.details ||
-            'Su solicitud ha sido recibida. El equipo de Contacto de Be Corporate se comunicará en menos de 24 horas hábiles.'
+            'Tu solicitud ha sido recibida. El equipo de Contacto de Be Corporate se comunicará contigo en menos de 24 horas hábiles.'
         );
         setFormData({
           nombre: '',
@@ -60,7 +60,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenBooking })
       console.warn('Form submission fallback:', err);
       setStatus('success');
       setStatusMessage(
-        'Su información ha sido registrada exitosamente. El equipo de Contacto de Be Corporate le contactará a la brevedad.'
+        'Tu información ha sido registrada exitosamente. El equipo de Contacto de Be Corporate te contactará a la brevedad.'
       );
     }
   };
@@ -79,7 +79,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenBooking })
                 Iniciemos la conversación
               </h2>
               <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
-                Coordine directamente con Contacto de Be Corporate para evaluar la idoneidad del piloto en su
+                Coordina directamente con Contacto de Be Corporate para evaluar la idoneidad del piloto en tu
                 organización.
               </p>
             </div>
@@ -141,7 +141,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenBooking })
             <div className="border-b border-slate-200 pb-4 mb-6">
               <h3 className="text-lg font-extrabold text-[#051C2C]">Solicitud de Diagnóstico para Piloto</h3>
               <p className="text-xs text-slate-500">
-                Complete los datos de su equipo para recibir la propuesta ejecutiva
+                Completa los datos de tu equipo para recibir la propuesta ejecutiva
               </p>
             </div>
 
@@ -265,7 +265,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenBooking })
 
                 <div>
                   <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                    Principal desafío de comunicación en sus reuniones
+                    Principal desafío de comunicación en tus reuniones
                   </label>
                   <select
                     value={formData.desafioPrincipal}
@@ -307,7 +307,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenBooking })
 
                 <div className="text-[11px] text-slate-500 text-center flex items-center justify-center gap-1.5 pt-2">
                   <Shield className="w-3.5 h-3.5 text-[#0052CC]" />
-                  <span>Sus datos están protegidos y serán tratados con confidencialidad estricta.</span>
+                  <span>Tus datos están protegidos y serán tratados con confidencialidad estricta.</span>
                 </div>
               </form>
             )}

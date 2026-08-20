@@ -30,12 +30,12 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onExplorePilot }) => 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-12">
           <div className="lg:col-span-7">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#051C2C] tracking-tight leading-[1.12] mb-6 font-['Inter']">
-              Convierta sus reuniones en una{' '}
+              Convierte tus reuniones en una{' '}
               <span className="text-[#0052CC]">ventaja competitiva</span>.
             </h1>
 
             <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-normal mb-8 max-w-2xl">
-              Ayudamos a líderes y comités directivos a transformar sus reuniones en conversaciones más claras,
+              Ayudamos a líderes y equipos directivos a transformar sus reuniones en conversaciones más claras,
               decisiones mejor definidas y compromisos que se convierten en acciones estratégicas medibles.
             </p>
 
@@ -45,7 +45,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onExplorePilot }) => 
                 onClick={onExplorePilot}
                 className="bg-[#0052CC] hover:bg-[#003E99] text-white text-sm font-bold uppercase tracking-wider px-6 py-4 rounded-md transition-all text-center flex items-center justify-center gap-2 shadow-md hover:shadow-lg cursor-pointer"
               >
-                <span>Conozca el piloto</span>
+                <span>Conoce el piloto</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
               <button
