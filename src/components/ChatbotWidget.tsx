@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, X, Bot, Sparkles, RefreshCw, ChevronRight } from 'lucide-react';
+import { Send, X, Bot, RefreshCw, ChevronRight } from 'lucide-react';
 import { ChatMessage } from '../types';
 
 interface ChatbotWidgetProps {
@@ -158,8 +158,8 @@ Para agendar una conversación ejecutiva de diagnóstico, puedes escribir direct
 
           {/* Quick Context Banner */}
           <div className="bg-[#F0F7FF] px-3.5 py-2 border-b border-sky-100 flex items-center justify-between text-xs text-[#0052CC]">
-            <span className="font-medium flex items-center gap-1.5">
-              <Sparkles className="w-3 h-3 text-[#0052CC]" /> Piloto Corporativo · 4 semanas · Team Track™
+            <span className="font-medium">
+              Piloto Corporativo · 4 semanas · Team Track™
             </span>
             <button
               onClick={() => {
