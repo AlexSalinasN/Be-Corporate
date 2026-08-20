@@ -192,6 +192,8 @@ Para coordinar una sesión de diagnóstico ejecutivo, puedes escribir directamen
         telefono,
         participantes,
         desafioPrincipal,
+        fecha,
+        hora,
         source = "Website Form",
       } = req.body;
 
@@ -209,6 +211,7 @@ Para coordinar una sesión de diagnóstico ejecutivo, puedes escribir directamen
       let crmSuccess = false;
 
       const formattedNotes = `[Registro Be Corporate]
+- Fecha seleccionada en calendario: ${fecha ? `${fecha}${hora ? ` (${hora})` : ''}` : 'Por definir con el equipo'}
 - Principal desafío de comunicación en reuniones: ${desafioPrincipal || "No especificado"}
 - Tamaño de cohorte: ${participantes || "8 a 12 participantes"}
 - Rol del cliente que se registra: ${cargo || "No especificado"}

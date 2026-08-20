@@ -26,4 +26,6 @@ export interface LeadFormData {
   telefono: string;
   participantes: string;
   desafioPrincipal: string;
+  fecha?: string;
+  hora?: string;
 }

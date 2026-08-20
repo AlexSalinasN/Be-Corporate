@@ -11,22 +11,23 @@ import { AudienceSection } from './components/AudienceSection';
 import { FAQSection } from './components/FAQSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
-import { BookingModal } from './components/BookingModal';
 import { ChatbotWidget } from './components/ChatbotWidget';
 
 export function App() {
-  const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<SectionKey>('inicio');
 
   // Set of revealed non-default sections
   const [revealedSections, setRevealedSections] = useState<Set<SectionKey>>(new Set());
 
   const handleOpenBooking = () => {
-    setIsBookingOpen(true);
-  };
-
-  const handleCloseBooking = () => {
-    setIsBookingOpen(false);
+    handleSelectSection('contacto');
+    setTimeout(() => {
+      const dateEl = document.getElementById('fecha-diagnostico');
+      if (dateEl) {
+        dateEl.focus();
+        dateEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 150);
   };
 
   const handleSelectSection = (key: SectionKey) => {
@@ -130,9 +131,6 @@ export function App() {
 
       {/* Footer */}
       <Footer />
-
-      {/* Booking Modal */}
-      <BookingModal isOpen={isBookingOpen} onClose={handleCloseBooking} />
 
       {/* Interactive AI Chatbot Widget */}
       <ChatbotWidget onOpenBooking={handleOpenBooking} />

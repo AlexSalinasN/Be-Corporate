@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle2, Shield, Calendar, Building2 } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle2, Shield, Calendar, Building2, Clock } from 'lucide-react';
 import { LeadFormData } from '../types';
 
 interface ContactSectionProps {
-  onOpenBooking: () => void;
+  onOpenBooking?: () => void;
 }
 
-export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenBooking }) => {
+export const ContactSection: React.FC<ContactSectionProps> = () => {
+  // Tomorrow's date formatted as YYYY-MM-DD for minimum booking date
+  const getMinDate = () => {
+    const d = new Date();
+    d.setDate(d.getDate() + 1);
+    return d.toISOString().split('T')[0];
+  };
+
   const [formData, setFormData] = useState<LeadFormData>({
     nombre: '',
     email: '',
@@ -15,10 +22,20 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenBooking })
     telefono: '',
     participantes: '8 a 12 participantes (1 cohorte)',
     desafioPrincipal: 'Decisiones lentas y acuerdos sin seguimiento claro',
+    fecha: getMinDate(),
+    hora: '10:00 AM (Hora CDMX)',
   });
 
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [statusMessage, setStatusMessage] = useState('');
+
+  const focusDateInput = () => {
+    const el = document.getElementById('fecha-diagnostico');
+    if (el) {
+      el.focus();
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -52,6 +69,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenBooking })
           telefono: '',
           participantes: '8 a 12 participantes (1 cohorte)',
           desafioPrincipal: 'Decisiones lentas y acuerdos sin seguimiento claro',
+          fecha: getMinDate(),
+          hora: '10:00 AM (Hora CDMX)',
         });
       } else {
         throw new Error(data.error || 'Error al enviar');
@@ -117,7 +136,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenBooking })
 
               <div className="mt-6 pt-5 border-t border-slate-800 relative z-10">
                 <button
-                  onClick={onOpenBooking}
+                  type="button"
+                  onClick={focusDateInput}
                   className="w-full bg-[#0052CC] hover:bg-[#003E99] text-white text-xs font-bold uppercase tracking-wider py-3.5 rounded-lg transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer"
                 >
                   <Calendar className="w-4 h-4" />
@@ -141,7 +161,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenBooking })
             <div className="border-b border-slate-200 pb-4 mb-6">
               <h3 className="text-lg font-extrabold text-[#051C2C]">Solicitud de Diagnóstico para Piloto</h3>
               <p className="text-xs text-slate-500">
-                Completa los datos de tu equipo para recibir la propuesta ejecutiva
+                Completa los datos de tu equipo y elige una fecha tentativa en el calendario para recibir la propuesta ejecutiva
               </p>
             </div>
 
@@ -154,18 +174,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenBooking })
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-md mx-auto">
                   {statusMessage}
                 </p>
-                <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-center gap-3">
+                <div className="pt-4 border-t border-slate-100 flex items-center justify-center">
                   <button
                     onClick={() => setStatus('idle')}
-                    className="text-xs font-bold text-[#0052CC] hover:underline cursor-pointer"
+                    className="bg-[#0052CC] hover:bg-[#003E99] text-white text-xs font-bold uppercase tracking-wider px-6 py-2.5 rounded-md cursor-pointer transition-colors"
                   >
                     Enviar otra solicitud
-                  </button>
-                  <button
-                    onClick={onOpenBooking}
-                    className="bg-[#0052CC] hover:bg-[#003E99] text-white text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-md cursor-pointer"
-                  >
-                    Agendar fecha en calendario
                   </button>
                 </div>
               </div>
@@ -263,6 +277,48 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenBooking })
                   </div>
                 </div>
 
+                {/* Date & Time Selector Section inside the form */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 bg-white border border-blue-100 rounded-xl shadow-2xs">
+                  <div>
+                    <label
+                      htmlFor="fecha-diagnostico"
+                      className="block text-xs font-bold text-[#0052CC] uppercase tracking-wider mb-1.5 flex items-center gap-1.5"
+                    >
+                      <Calendar className="w-3.5 h-3.5 text-[#0052CC]" />
+                      <span>Fecha deseada en calendario</span>
+                    </label>
+                    <input
+                      type="date"
+                      id="fecha-diagnostico"
+                      min={getMinDate()}
+                      value={formData.fecha}
+                      onChange={(e) => setFormData({ ...formData, fecha: e.target.value })}
+                      className="consulting-input bg-slate-50 focus:bg-white text-sm"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      className="block text-xs font-bold text-[#0052CC] uppercase tracking-wider mb-1.5 flex items-center gap-1.5"
+                    >
+                      <Clock className="w-3.5 h-3.5 text-[#0052CC]" />
+                      <span>Horario preferido</span>
+                    </label>
+                    <select
+                      value={formData.hora}
+                      onChange={(e) => setFormData({ ...formData, hora: e.target.value })}
+                      className="consulting-input bg-slate-50 focus:bg-white text-sm"
+                    >
+                      <option value="09:00 AM (Hora CDMX)">09:00 AM (Hora CDMX)</option>
+                      <option value="10:00 AM (Hora CDMX)">10:00 AM (Hora CDMX)</option>
+                      <option value="11:30 AM (Hora CDMX)">11:30 AM (Hora CDMX)</option>
+                      <option value="01:00 PM (Hora CDMX)">01:00 PM (Hora CDMX)</option>
+                      <option value="03:30 PM (Hora CDMX)">03:30 PM (Hora CDMX)</option>
+                      <option value="05:00 PM (Hora CDMX)">05:00 PM (Hora CDMX)</option>
+                    </select>
+                  </div>
+                </div>
+
                 <div>
                   <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
                     Principal desafío de comunicación en tus reuniones
@@ -298,7 +354,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenBooking })
                       <span>Procesando solicitud...</span>
                     ) : (
                       <>
-                        <span>Solicitar diagnóstico y propuesta ejecutiva</span>
+                        <span>Solicitar diagnóstico y agendar fecha</span>
                         <Send className="w-4 h-4" />
                       </>
                     )}
@@ -317,3 +373,4 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenBooking })
     </section>
   );
 };
+

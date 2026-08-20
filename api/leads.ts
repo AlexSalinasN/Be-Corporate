@@ -69,6 +69,8 @@ export default async function handler(req: VercelReq, res: VercelRes) {
       telefono = "",
       participantes = "8 a 12 participantes",
       desafioPrincipal = "General",
+      fecha = "",
+      hora = "",
       source = "Web Be Corporate",
     } = body;
 
@@ -86,6 +88,15 @@ export default async function handler(req: VercelReq, res: VercelRes) {
     let hubspotSuccess = false;
     let syncMethod = "local";
 
+    const formattedNotes = `[Registro Be Corporate]
+- Fecha seleccionada en calendario: ${fecha ? `${fecha}${hora ? ` (${hora})` : ''}` : 'Por definir con el equipo'}
+- Principal desafío de comunicación en reuniones: ${desafioPrincipal}
+- Tamaño de cohorte: ${participantes}
+- Rol del cliente que se registra: ${cargo || "No especificado"}
+- Empresa: ${empresa || "No especificada"}
+- Teléfono: ${telefono || "No proporcionado"}
+- Origen: ${source}`;
+
     // 1. CRM Forms API v3 (Direct form submission)
     if (portalId && formId) {
       try {
@@ -99,13 +110,7 @@ export default async function handler(req: VercelReq, res: VercelRes) {
             {
               objectTypeId: "0-1",
               name: "message",
-              value: `[Registro Be Corporate]
-- Principal desafío de comunicación en reuniones: ${desafioPrincipal}
-- Tamaño de cohorte: ${participantes}
-- Rol del cliente que se registra: ${cargo || "No especificado"}
-- Empresa: ${empresa || "No especificada"}
-- Teléfono: ${telefono || "No proporcionado"}
-- Origen: ${source}`,
+              value: formattedNotes,
             },
           ],
           context: {
@@ -149,13 +154,7 @@ export default async function handler(req: VercelReq, res: VercelRes) {
               jobtitle: cargo,
               phone: telefono,
               hs_lead_status: "NEW",
-              message: `[Registro Be Corporate]
-- Principal desafío de comunicación en reuniones: ${desafioPrincipal}
-- Tamaño de cohorte: ${participantes}
-- Rol del cliente que se registra: ${cargo || "No especificado"}
-- Empresa: ${empresa || "No especificada"}
-- Teléfono: ${telefono || "No proporcionado"}
-- Origen: ${source}`,
+              message: formattedNotes,
             },
           }),
         });
