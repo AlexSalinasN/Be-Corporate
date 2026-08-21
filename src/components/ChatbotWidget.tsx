@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, X, Bot, RefreshCw, ChevronRight } from 'lucide-react';
 import { ChatMessage } from '../types';
+import { getAdvisorResponse } from '../lib/advisorEngine';
 
 interface ChatbotWidgetProps {
   onOpenBooking: () => void;
@@ -67,20 +68,16 @@ export const ChatbotWidget: React.FC<ChatbotWidgetProps> = ({ onOpenBooking }) =
       const botMsg: ChatMessage = {
         id: (Date.now() + 1).toString(),
         sender: 'bot',
-        text: data.response || 'No pudimos generar la respuesta en este momento.',
+        text: data.response || getAdvisorResponse(query),
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
       setMessages((prev) => [...prev, botMsg]);
     } catch (err) {
-      console.warn('Fallback chat response:', err);
+      console.warn('Contextual advisor response fallback:', err);
       const fallbackMsg: ChatMessage = {
         id: (Date.now() + 1).toString(),
         sender: 'bot',
-        text: `High-Performance Meetings™ es nuestro programa piloto de 4 semanas estructurado en 12 horas de formación aplicada para cohortes de 8 a 12 participantes con propuesta a la medida de tu empresa.
-
-Transformamos las reuniones corporativas en ventajas competitivas mediante The Be System™ (Discover, Design, Develop, Apply, Grow).
-
-Para agendar una conversación ejecutiva de diagnóstico, puedes escribir directamente a **contacto@becorporate.mx** o llamar al **55 3581 3240**.`,
+        text: getAdvisorResponse(query),
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
       setMessages((prev) => [...prev, fallbackMsg]);
