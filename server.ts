@@ -3,7 +3,7 @@ import path from "path";
 import { createServer as createViteServer } from "vite";
 import dotenv from "dotenv";
 import { GoogleGenAI } from "@google/genai";
-import { BE_CORPORATE_SYSTEM_PROMPT, getAdvisorResponse } from "./src/lib/advisorEngine";
+import { BE_CORPORATE_SYSTEM_PROMPT, getAdvisorResponse, cleanBotResponse } from "./src/lib/advisorEngine";
 
 dotenv.config();
 
@@ -101,14 +101,14 @@ async function startServer() {
       }
 
       res.json({
-        response: responseText,
+        response: cleanBotResponse(responseText),
       });
     } catch (error: any) {
       console.error("Error in /api/chat:", error);
       // Even in case of API error, provide dynamic contextual knowledge response
       const fallbackResponse = getAdvisorResponse(req.body?.message || "");
       res.json({
-        response: fallbackResponse,
+        response: cleanBotResponse(fallbackResponse),
       });
     }
   });

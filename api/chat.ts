@@ -1,6 +1,6 @@
 import type { IncomingMessage, ServerResponse } from "http";
 import { GoogleGenAI } from "@google/genai";
-import { BE_CORPORATE_SYSTEM_PROMPT, getAdvisorResponse } from "../src/lib/advisorEngine";
+import { BE_CORPORATE_SYSTEM_PROMPT, getAdvisorResponse, cleanBotResponse } from "../src/lib/advisorEngine";
 
 interface VercelReq extends IncomingMessage {
   body: any;
@@ -121,12 +121,12 @@ export default async function handler(req: VercelReq, res: VercelRes) {
     }
 
     return res.status(200).json({
-      response: responseText,
+      response: cleanBotResponse(responseText),
     });
   } catch (error: any) {
     console.error("Vercel /api/chat error:", error);
     return res.status(200).json({
-      response: getAdvisorResponse(req.body?.message || ""),
+      response: cleanBotResponse(getAdvisorResponse(req.body?.message || "")),
     });
   }
 }

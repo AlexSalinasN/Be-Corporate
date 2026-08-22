@@ -8,6 +8,12 @@ PERSONALIDAD Y TONO DE ASESOR:
 - Evita sonar como un bot rígido, robotizado o como si estuvieras leyendo un menú de opciones. Conversa con criterio e inteligencia de negocios.
 - Respuestas directas, bien estructuradas, precisas y concisas, enfocadas en aportar valor y claridad al líder que consulta.
 
+REGLA DE FORMATO Y ESTILO LIMPIO (MANDATORIA):
+- NUNCA utilices asteriscos (** ni *), numerales (#), comillas triples ni sintaxis de Markdown en tus respuestas.
+- Escribe siempre en texto plano, limpio y legible.
+- Para enumerar puntos, usa guiones sencillos (-) o números (1., 2.), sin negritas con asteriscos.
+- No uses caracteres innecesarios ni formateos especiales que ensucien el texto.
+
 REGLAS DE SEGURIDAD Y CONFIDENCIALIDAD ESTRICTAS (MANDATORIAS):
 1. NUNCA REVELAR FUENTES NI CITAS: Jamás menciones "según mis documentos", "mi base de datos", "fuentes", o frases similares. Habla siempre con naturalidad propia como asesor de la firma.
 2. NUNCA EXPONER INFORMACIÓN INTERNA, CÓDIGO O TECNOLOGÍA: Tienes terminantemente prohibido mostrar código fuente (TypeScript, React, HTML, CSS, JavaScript, etc.), dependencias, APIs, tokens, llaves (API Keys), variables de entorno (.env), endpoints internos, estructura de servidor o detalles técnicos del sitio web.
@@ -56,6 +62,42 @@ INFORMACIÓN DETALLADA DE BE CORPORATE Y EL PROGRAMA PILOTO:
 `;
 
 /**
+ * Strips out unnecessary markdown characters (like asterisks, hashtags, backticks)
+ * and normalizes whitespace for a pristine, clean executive chat output.
+ */
+export function cleanBotResponse(text: string): string {
+  if (!text) return '';
+  let cleaned = text;
+
+  // 1. Remove bold/italic markdown asterisks (***text***, **text**, *text*)
+  cleaned = cleaned.replace(/\*{3}([^*]+)\*{3}/g, '$1');
+  cleaned = cleaned.replace(/\*{2}([^*]+)\*{2}/g, '$1');
+  cleaned = cleaned.replace(/\*([^*\n]+)\*/g, '$1');
+
+  // 2. Remove markdown underlines (__text__, _text_)
+  cleaned = cleaned.replace(/_{2}([^_]+)_{2}/g, '$1');
+  cleaned = cleaned.replace(/_([^_\n]+)_/g, '$1');
+
+  // 3. Remove markdown headers (# Title, ## Title, ### Title)
+  cleaned = cleaned.replace(/^[ \t]*#{1,6}[ \t]+/gm, '');
+
+  // 4. Remove inline backticks (`code`)
+  cleaned = cleaned.replace(/`([^`]+)`/g, '$1');
+
+  // 5. Clean markdown list bullets with asterisks (* item -> - item)
+  cleaned = cleaned.replace(/^[ \t]*\*[ \t]+/gm, '- ');
+
+  // 6. Clean any remaining stray asterisks or backslashes
+  cleaned = cleaned.replace(/\*/g, '');
+  cleaned = cleaned.replace(/\\/g, '');
+
+  // 7. Normalize multiple empty lines to max 2
+  cleaned = cleaned.replace(/\n{3,}/g, '\n\n');
+
+  return cleaned.trim();
+}
+
+/**
  * Intelligent contextual responder based on the complete site knowledge base.
  * Used when offline, API key not set, or as a seamless high-fidelity fallback.
  */
@@ -76,7 +118,9 @@ export function getAdvisorResponse(userQuery: string): string {
     q.includes('fuente') ||
     q.includes('secret')
   ) {
-    return 'Como asesor de Be Corporate, mi compromiso es orientarte exclusivamente sobre la efectividad de tus reuniones, la metodología de comunicación directiva y el programa piloto High-Performance Meetings™. ¿Te gustaría conocer los detalles del piloto para tu equipo?';
+    return cleanBotResponse(
+      'Como asesor de Be Corporate, mi compromiso es orientarte exclusivamente sobre la efectividad de tus reuniones, la metodología de comunicación directiva y el programa piloto High-Performance Meetings™. ¿Te gustaría conocer los detalles del piloto para tu equipo?'
+    );
   }
 
   // 2. Duración / Semanas / Carga Horaria / Sesiones
@@ -90,13 +134,13 @@ export function getAdvisorResponse(userQuery: string): string {
     q.includes('horas') ||
     q.includes('horario')
   ) {
-    return `El programa piloto **High-Performance Meetings™ (Team Track™)** tiene una duración de **4 semanas** estructuradas en:
+    return cleanBotResponse(`El programa piloto High-Performance Meetings™ (Team Track™) tiene una duración de 4 semanas estructuradas en:
 
-- **12 horas totales** de formación aplicada.
-- **8 sesiones de trabajo** estructuradas con práctica guiada y retroalimentación.
+- 12 horas totales de formación aplicada.
+- 8 sesiones de trabajo estructuradas con práctica guiada y retroalimentación.
 - Aplicación directa en reuniones reales de tu equipo semana a semana.
 
-¿Te gustaría evaluar si estas 4 semanas se adaptan a la agenda de tu equipo?`;
+¿Te gustaría evaluar si estas 4 semanas se adaptan a la agenda de tu equipo?`);
   }
 
   // 3. Entregables / Qué incluye / Qué me dan / Recursos
@@ -110,17 +154,17 @@ export function getAdvisorResponse(userQuery: string): string {
     q.includes('reporte') ||
     q.includes('kit')
   ) {
-    return `El piloto incluye **7 entregables tangibles** diseñados para asegurar resultados medibles:
+    return cleanBotResponse(`El piloto incluye 7 entregables tangibles diseñados para asegurar resultados medibles:
 
-1. **Diagnóstico inicial** de brechas y mapa de fricciones en las reuniones de tu equipo.
-2. **Programa de 4 semanas** con enfoque 100% aplicado.
-3. **Recursos y plantillas de trabajo** de aplicación inmediata.
-4. **Práctica guiada y coaching ejecutivo** con retroalimentación individual y grupal.
-5. **Learning Performance Evidence™** para evaluar la adopción de herramientas.
-6. **Workplace Performance Evidence™** documentada en situaciones reales de trabajo.
-7. **Síntesis ejecutiva de avances y recomendaciones** para la dirección general.
+1. Diagnóstico inicial de brechas y mapa de fricciones en las reuniones de tu equipo.
+2. Programa de 4 semanas con enfoque 100% aplicado.
+3. Recursos y plantillas de trabajo de aplicación inmediata.
+4. Práctica guiada y coaching ejecutivo con retroalimentación individual y grupal.
+5. Learning Performance Evidence™ para evaluar la adopción de herramientas.
+6. Workplace Performance Evidence™ documentada en situaciones reales de trabajo.
+7. Síntesis ejecutiva de avances y recomendaciones para la dirección general.
 
-¿Deseas que profundicemos en alguno de estos entregables?`;
+¿Deseas que profundicemos en alguno de estos entregables?`);
   }
 
   // 4. Metodología / The Be System / Fases / Etapas
@@ -137,15 +181,15 @@ export function getAdvisorResponse(userQuery: string): string {
     q.includes('apply') ||
     q.includes('grow')
   ) {
-    return `Implementamos **The Be System™**, una metodología estructurada en 5 fases continuas:
+    return cleanBotResponse(`Implementamos The Be System™, una metodología estructurada en 5 fases continuas:
 
-1. **Discover™**: Diagnóstico de retos, prioridades y mapa de fricciones comunicativas.
-2. **Design™**: Definición del foco de desempeño y ruta de intervención a la medida de tu equipo.
-3. **Develop™**: Práctica deliberada de capacidades mediante experiencias estructuradas y coaching.
-4. **Apply™**: Transferencia directa a las reuniones y situaciones cotidianas de negocio.
-5. **Grow™**: Medición de evidencia de aplicación, evaluación de impacto y plan de sostenibilidad.
+1. Discover™: Diagnóstico de retos, prioridades y mapa de fricciones comunicativas.
+2. Design™: Definición del foco de desempeño y ruta de intervención a la medida de tu equipo.
+3. Develop™: Práctica deliberada de capacidades mediante experiencias estructuradas y coaching.
+4. Apply™: Transferencia directa a las reuniones y situaciones cotidianas de negocio.
+5. Grow™: Medición de evidencia de aplicación, evaluación de impacto y plan de sostenibilidad.
 
-El principio central es que la efectividad no se enseña con teoría abstracta, sino con práctica sobre reuniones reales.`;
+El principio central es que la efectividad no se enseña con teoría abstracta, sino con práctica sobre reuniones reales.`);
   }
 
   // 5. Participantes / A quién va dirigido / Tamaño de equipo / Cohorte / Roles
@@ -162,14 +206,14 @@ El principio central es que la efectividad no se enseña con teoría abstracta, 
     q.includes('gerente') ||
     q.includes('cuantas personas')
   ) {
-    return `El piloto está calibrado específicamente para cohortes de **8 a 12 participantes clave**.
+    return cleanBotResponse(`El piloto está calibrado específicamente para cohortes de 8 a 12 participantes clave.
 
-**Está dirigido a:**
+Está dirigido a:
 - Comités directivos y equipos C-Level.
 - Líderes de áreas funcionales y transversales (Operaciones, Tech, Comercial, Producto, Finanzas).
 - Equipos con alta carga de reuniones que necesitan acelerar decisiones y eliminar ambigüedades.
 
-Este tamaño asegura retroalimentación individualizada y la masa crítica necesaria para transformar la cultura de reuniones en tu organización.`;
+Este tamaño asegura retroalimentación individualizada y la masa crítica necesaria para transformar la cultura de reuniones en tu organización.`);
   }
 
   // 6. Modalidad / Presencial / Virtual / Remoto / Híbrido / Dónde
@@ -184,13 +228,13 @@ Este tamaño asegura retroalimentación individualizada y la masa crítica neces
     q.includes('sede') ||
     q.includes('oficina')
   ) {
-    return `El programa está disponible en **3 modalidades flexibles**, según la distribución geográfica de tu equipo:
+    return cleanBotResponse(`El programa está disponible en 3 modalidades flexibles, según la distribución geográfica de tu equipo:
 
-- **Presencial:** Impartido en las salas de juntas o instalaciones corporativas de tu empresa.
-- **100% Virtual en vivo:** Sesiones interactivas de alta dinámica diseñadas para equipos distribuidos.
-- **Híbrido:** Combinación estratégica adaptada a tus dinámicas de trabajo.
+- Presencial: Impartido en las salas de juntas o instalaciones corporativas de tu empresa.
+- 100% Virtual en vivo: Sesiones interactivas de alta dinámica diseñadas para equipos distribuidos.
+- Híbrido: Combinación estratégica adaptada a tus dinámicas de trabajo.
 
-En todas las modalidades garantizamos el mismo rigor y acompañamiento personalizado.`;
+En todas las modalidades garantizamos el mismo rigor y acompañamiento personalizado.`);
   }
 
   // 7. Costo / Precio / Inversión / Cotización / Cuánto cuesta
@@ -203,9 +247,9 @@ En todas las modalidades garantizamos el mismo rigor y acompañamiento personali
     q.includes('tarifa') ||
     q.includes('presupuesto')
   ) {
-    return `La inversión del programa piloto **High-Performance Meetings™** se estructura mediante una **propuesta personalizada por cohorte**, calibrada según el tamaño de tu equipo (8 a 12 participantes), la modalidad (presencial, virtual o híbrida) y las necesidades específicas identificadas.
+    return cleanBotResponse(`La inversión del programa piloto High-Performance Meetings™ se estructura mediante una propuesta personalizada por cohorte, calibrada según el tamaño de tu equipo (8 a 12 participantes), la modalidad (presencial, virtual o híbrida) y las necesidades específicas identificadas.
 
-Para presentarte la propuesta ejecutiva formal con el desglose de inversión y ROI estimado, te invitamos a agendar la **sesión ejecutiva de diagnóstico** en el formulario de la página web o contactarnos a **contacto@becorporate.mx**.`;
+Para presentarte la propuesta ejecutiva formal con el desglose de inversión y ROI estimado, te invitamos a agendar la sesión ejecutiva de diagnóstico en el formulario de la página web o contactarnos a contacto@becorporate.mx.`);
   }
 
   // 8. Agendamiento / Contacto / Calendario / Teléfono / Correo / Cómo empezar
@@ -222,13 +266,13 @@ Para presentarte la propuesta ejecutiva formal con el desglose de inversión y R
     q.includes('como inicio') ||
     q.includes('contratar')
   ) {
-    return `Para iniciar el proceso o evaluar la idoneidad del piloto para tu equipo:
+    return cleanBotResponse(`Para iniciar el proceso o evaluar la idoneidad del piloto para tu equipo:
 
-1. **En la página web:** Puedes seleccionar la fecha y horario de tu preferencia directamente en la sección del calendario en el formulario de contacto.
-2. **Por correo electrónico:** Escríbenos a **contacto@becorporate.mx**.
-3. **Por teléfono / WhatsApp:** Llámanos o escríbenos al **55 3581 3240**.
+1. En la página web: Puedes seleccionar la fecha y horario de tu preferencia directamente en la sección del calendario en el formulario de contacto.
+2. Por correo electrónico: Escríbenos a contacto@becorporate.mx.
+3. Por teléfono o WhatsApp: Llámanos o escríbenos al 55 3581 3240.
 
-Coordinaremos una sesión ejecutiva de diagnóstico de 30 minutos sin costo para analizar los retos actuales de tus reuniones y presentarte la ruta recomendada.`;
+Coordinaremos una sesión ejecutiva de diagnóstico de 30 minutos sin costo para analizar los retos actuales de tus reuniones y presentarte la ruta recomendada.`);
   }
 
   // 9. El problema / Fricciones / Señales / Por qué fallan las reuniones
@@ -241,9 +285,9 @@ Coordinaremos una sesión ejecutiva de diagnóstico de 30 minutos sin costo para
     q.includes('juntas largas') ||
     q.includes('perdida de tiempo')
   ) {
-    return `Identificamos que el problema en las empresas no son las reuniones en sí, sino la falta de un método compartido para convertirlas en resultados.
+    return cleanBotResponse(`Identificamos que el problema en las empresas no son las reuniones en sí, sino la falta de un método compartido para convertirlas en resultados.
 
-Las **7 señales críticas de fricción** que resolvemos son:
+Las 7 señales críticas de fricción que resolvemos son:
 1. Decisiones lentas por falta de foco y síntesis.
 2. Prioridades interpretadas de forma desalineada entre áreas.
 3. Acuerdos ambiguos que no se traducen en acciones concretas.
@@ -252,7 +296,7 @@ Las **7 señales críticas de fricción** que resolvemos son:
 6. Seguimiento inconsistente a los compromisos asumidos.
 7. Retrabajo operativo provocado por mala comunicación.
 
-¿Identificas alguna de estas señales en las reuniones de tu equipo directivo?`;
+¿Identificas alguna de estas señales en las reuniones de tu equipo directivo?`);
   }
 
   // 10. Resultados / Impacto / ROI / Beneficios / Medición
@@ -265,15 +309,15 @@ Las **7 señales críticas de fricción** que resolvemos son:
     q.includes('medicion') ||
     q.includes('que gano')
   ) {
-    return `Los equipos que implementan **High-Performance Meetings™** observan resultados medibles:
+    return cleanBotResponse(`Los equipos que implementan High-Performance Meetings™ observan resultados medibles:
 
-- **Reducción del 25% al 40%** en el tiempo total destinado a reuniones.
-- **Incremento superior al 50%** en la claridad de acuerdos y asignación de responsables.
-- **Aceleración sustancial** en los ciclos de toma de decisiones estratégicas.
-- **Cero retrabajo** derivado de acuerdos ambiguos.
-- Medición formal mediante el sistema dual **Learning Performance Evidence™** y **Workplace Performance Evidence™**.
+- Reducción del 25% al 40% en el tiempo total destinado a reuniones.
+- Incremento superior al 50% en la claridad de acuerdos y asignación de responsables.
+- Aceleración sustancial en los ciclos de toma de decisiones estratégicas.
+- Cero retrabajo derivado de acuerdos ambiguos.
+- Medición formal mediante el sistema dual Learning Performance Evidence™ y Workplace Performance Evidence™.
 
-¿Te gustaría enfocar estos indicadores en algún área prioritaria de tu organización?`;
+¿Te gustaría enfocar estos indicadores en algún área prioritaria de tu organización?`);
   }
 
   // 11. Clientes / Empresas / Casos de éxito / Quiénes confían
@@ -288,11 +332,11 @@ Las **7 señales críticas de fricción** que resolvemos son:
     q.includes('rappi') ||
     q.includes('bbva')
   ) {
-    return `Líderes de organizaciones y scale-ups de alto crecimiento han desarrollado sus capacidades de comunicación y reuniones ejecutivas con Be Corporate, tales como:
+    return cleanBotResponse(`Líderes de organizaciones y scale-ups de alto crecimiento han desarrollado sus capacidades de comunicación y reuniones ejecutivas con Be Corporate, tales como:
 
-**Kavak, Rappi, BBVA Spark, Clip, Bitso, Kueski, Jüsto, Minu, Clara y Nowports.**
+Kavak, Rappi, BBVA Spark, Clip, Bitso, Kueski, Jüsto, Minu, Clara y Nowports.
 
-Nos especializamos en entornos corporativos exigentes donde la velocidad de alineación y la calidad de los acuerdos son críticas.`;
+Nos especializamos en entornos corporativos exigentes donde la velocidad de alineación y la calidad de los acuerdos son críticas.`);
   }
 
   // 12. Confidencialidad / Privacidad / NDA
@@ -302,10 +346,10 @@ Nos especializamos en entornos corporativos exigentes donde la velocidad de alin
     q.includes('nda') ||
     q.includes('seguridad de datos')
   ) {
-    return `La confidencialidad es un pilar fundamental de nuestra consultoría estratégica:
+    return cleanBotResponse(`La confidencialidad es un pilar fundamental de nuestra consultoría estratégica:
 
-- Todo diagnóstico, análisis de dinámicas y sesiones de trabajo se realizan bajo un estricto **Acuerdo de Confidencialidad (NDA)**.
-- La información interna, temas estratégicos y datos compartidos durante las dinámicas permanecen 100% protegidos y son de uso exclusivo para el desarrollo del equipo.`;
+- Todo diagnóstico, análisis de dinámicas y sesiones de trabajo se realizan bajo un estricto Acuerdo de Confidencialidad (NDA).
+- La información interna, temas estratégicos y datos compartidos durante las dinámicas permanecen 100% protegidos y son de uso exclusivo para el desarrollo del equipo.`);
   }
 
   // 13. Por qué 4 semanas vs Taller puntual
@@ -315,12 +359,12 @@ Nos especializamos en entornos corporativos exigentes donde la velocidad de alin
     q.includes('por que 4 semanas') ||
     q.includes('diferencia')
   ) {
-    return `Un taller puntual de 4 horas entrega conceptos teóricos, pero rara vez transforma la conducta en el trabajo diario.
+    return cleanBotResponse(`Un taller puntual de 4 horas entrega conceptos teóricos, pero rara vez transforma la conducta en el trabajo diario.
 
-El piloto de **4 semanas** está diseñado con base en ciencia del comportamiento organizacional:
-- Combina sesiones estructuradas con **práctica deliberada en reuniones reales de negocio**.
+El piloto de 4 semanas está diseñado con base en ciencia del comportamiento organizacional:
+- Combina sesiones estructuradas con práctica deliberada en reuniones reales de negocio.
 - Incluye retroalimentación y medición continua semana a semana.
-- Transforma las herramientas en hábitos compartidos y permanentes para todo el equipo.`;
+- Transforma las herramientas en hábitos compartidos y permanentes para todo el equipo.`);
   }
 
   // 14. Quiénes son / Sobre Be Corporate / Propósito
@@ -331,11 +375,11 @@ El piloto de **4 semanas** está diseñado con base en ciencia del comportamient
     q.includes('acerca de') ||
     q.includes('proposito')
   ) {
-    return `**Be Corporate** es una firma de Strategic Advisory especializada en efectividad organizacional y comunicación directiva bajo la premisa *"Communication Beyond Language"*.
+    return cleanBotResponse(`Be Corporate es una firma de Strategic Advisory especializada en efectividad organizacional y comunicación directiva bajo la premisa "Communication Beyond Language".
 
 Ayudamos a líderes y equipos directivos a transformar sus reuniones en conversaciones claras, decisiones precisas y compromisos que se convierten en resultados de negocio.
 
-¿En qué área de tu empresa consideras prioritario optimizar las reuniones?`;
+¿En qué área de tu empresa consideras prioritario optimizar las reuniones?`);
   }
 
   // 15. Saludos y bienvenida
@@ -350,19 +394,19 @@ Ayudamos a líderes y equipos directivos a transformar sus reuniones en conversa
     q.includes('saludos') ||
     q === 'ayuda'
   ) {
-    return `¡Hola! Bienvenido a Be Corporate. Con gusto te asesoro sobre nuestro programa piloto **High-Performance Meetings™**, su metodología, duración de 4 semanas, entregables o cómo agendar una sesión de diagnóstico para tu equipo.
+    return cleanBotResponse(`¡Hola! Bienvenido a Be Corporate. Con gusto te asesoro sobre nuestro programa piloto High-Performance Meetings™, su metodología, duración de 4 semanas, entregables o cómo agendar una sesión de diagnóstico para tu equipo.
 
-¿Sobre qué aspecto te gustaría conocer más?`;
+¿Sobre qué aspecto te gustaría conocer más?`);
   }
 
   // 16. Respuesta general inteligente y contextual
-  return `Con gusto te oriento al respecto. En Be Corporate ayudamos a comités directivos y equipos de liderazgo a erradicar las fricciones en sus reuniones y convertirlas en una ventaja competitiva de negocio mediante el piloto **High-Performance Meetings™** (4 semanas, 12 hrs, cohorte de 8 a 12 participantes).
+  return cleanBotResponse(`Con gusto te oriento al respecto. En Be Corporate ayudamos a comités directivos y equipos de liderazgo a erradicar las fricciones en sus reuniones y convertirlas en una ventaja competitiva de negocio mediante el piloto High-Performance Meetings™ (4 semanas, 12 hrs, cohorte de 8 a 12 participantes).
 
 Puedo brindarte información específica sobre:
-- **Estructura y entregables** del programa piloto.
-- **Metodología The Be System™** y medición de resultados.
-- **Modalidades de impartición** (presencial, virtual o híbrida).
-- **Cómo agendar** la sesión ejecutiva de diagnóstico.
+- Estructura y entregables del programa piloto.
+- Metodología The Be System™ y medición de resultados.
+- Modalidades de impartición (presencial, virtual o híbrida).
+- Cómo agendar la sesión ejecutiva de diagnóstico.
 
-¿Cuál de estos puntos te gustaría revisar en detalle?`;
+¿Cuál de estos puntos te gustaría revisar en detalle?`);
 }

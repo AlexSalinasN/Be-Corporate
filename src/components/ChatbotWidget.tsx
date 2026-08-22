@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, X, Bot, RefreshCw, ChevronRight } from 'lucide-react';
 import { ChatMessage } from '../types';
-import { getAdvisorResponse } from '../lib/advisorEngine';
+import { getAdvisorResponse, cleanBotResponse } from '../lib/advisorEngine';
 
 interface ChatbotWidgetProps {
   onOpenBooking: () => void;
@@ -68,7 +68,7 @@ export const ChatbotWidget: React.FC<ChatbotWidgetProps> = ({ onOpenBooking }) =
       const botMsg: ChatMessage = {
         id: (Date.now() + 1).toString(),
         sender: 'bot',
-        text: data.response || getAdvisorResponse(query),
+        text: cleanBotResponse(data.response || getAdvisorResponse(query)),
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
       setMessages((prev) => [...prev, botMsg]);
@@ -77,7 +77,7 @@ export const ChatbotWidget: React.FC<ChatbotWidgetProps> = ({ onOpenBooking }) =
       const fallbackMsg: ChatMessage = {
         id: (Date.now() + 1).toString(),
         sender: 'bot',
-        text: getAdvisorResponse(query),
+        text: cleanBotResponse(getAdvisorResponse(query)),
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
       setMessages((prev) => [...prev, fallbackMsg]);
