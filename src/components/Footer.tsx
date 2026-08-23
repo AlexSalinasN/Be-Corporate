@@ -1,10 +1,21 @@
 import React from 'react';
-import { Mail, Phone, MapPin, ArrowUp, ShieldCheck } from 'lucide-react';
+import { Mail, Phone, MapPin, ArrowUp, ShieldCheck, FileText } from 'lucide-react';
 import { Logo } from './Logo';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  onOpenPrivacyPolicy?: () => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onOpenPrivacyPolicy }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handlePrivacyClick = (e: React.MouseEvent) => {
+    if (onOpenPrivacyPolicy) {
+      e.preventDefault();
+      onOpenPrivacyPolicy();
+    }
   };
 
   return (
@@ -66,6 +77,17 @@ export const Footer: React.FC = () => {
                   Preguntas Frecuentes
                 </a>
               </li>
+              <li>
+                <a
+                  href="#aviso-de-privacidad"
+                  onClick={handlePrivacyClick}
+                  id="footer-nav-aviso-privacidad"
+                  className="hover:text-[#38BDF8] transition-colors text-slate-300 font-medium inline-flex items-center gap-1.5"
+                >
+                  <FileText className="w-3 h-3 text-[#38BDF8]" />
+                  <span>Aviso de Privacidad</span>
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -103,7 +125,15 @@ export const Footer: React.FC = () => {
             © {new Date().getFullYear()} Be Corporate. Todos los derechos reservados. High-Performance Meetings™ y The
             Be System™ son marcas de Be Corporate.
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-5">
+            <a
+              href="#aviso-de-privacidad"
+              onClick={handlePrivacyClick}
+              id="footer-bottom-aviso-privacidad"
+              className="text-slate-400 hover:text-white transition-colors underline underline-offset-4 cursor-pointer"
+            >
+              Aviso de Privacidad
+            </a>
             <button
               onClick={scrollToTop}
               className="flex items-center gap-1 text-slate-400 hover:text-white transition-colors cursor-pointer"

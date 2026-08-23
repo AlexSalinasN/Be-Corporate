@@ -339,17 +339,21 @@ Kavak, Rappi, BBVA Spark, Clip, Bitso, Kueski, Jüsto, Minu, Clara y Nowports.
 Nos especializamos en entornos corporativos exigentes donde la velocidad de alineación y la calidad de los acuerdos son críticas.`);
   }
 
-  // 12. Confidencialidad / Privacidad / NDA
+  // 12. Confidencialidad / Privacidad / Aviso de Privacidad / NDA
   if (
     q.includes('confidencial') ||
     q.includes('privacidad') ||
+    q.includes('aviso de privacidad') ||
+    q.includes('politica de privacidad') ||
+    q.includes('arco') ||
     q.includes('nda') ||
     q.includes('seguridad de datos')
   ) {
-    return cleanBotResponse(`La confidencialidad es un pilar fundamental de nuestra consultoría estratégica:
+    return cleanBotResponse(`La confidencialidad y la protección de datos son pilares fundamentales de Be Corporate:
 
+- Contamos con un Aviso de Privacidad integral disponible en el pie de página de nuestro sitio web (www.becorporate.mx/aviso-de-privacidad), en cumplimiento con la LFPDPPP.
 - Todo diagnóstico, análisis de dinámicas y sesiones de trabajo se realizan bajo un estricto Acuerdo de Confidencialidad (NDA).
-- La información interna, temas estratégicos y datos compartidos durante las dinámicas permanecen 100% protegidos y son de uso exclusivo para el desarrollo del equipo.`);
+- Para el ejercicio de derechos ARCO o dudas de privacidad, puedes escribir directamente a contacto@becorporate.mx.`);
   }
 
   // 13. Por qué 4 semanas vs Taller puntual

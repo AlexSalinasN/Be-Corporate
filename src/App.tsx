@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Header, SectionKey } from './components/Header';
 import { Hero } from './components/Hero';
 import { ChallengeSection } from './components/ChallengeSection';
@@ -12,14 +12,53 @@ import { FAQSection } from './components/FAQSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { ChatbotWidget } from './components/ChatbotWidget';
+import { PrivacyPolicy } from './components/PrivacyPolicy';
 
 export function App() {
   const [activeSection, setActiveSection] = useState<SectionKey>('inicio');
+  const [showPrivacyPolicy, setShowPrivacyPolicy] = useState<boolean>(false);
 
   // Set of revealed non-default sections
   const [revealedSections, setRevealedSections] = useState<Set<SectionKey>>(new Set());
 
+  // Check URL hash on load and when hash changes
+  useEffect(() => {
+    const handleHashChange = () => {
+      if (window.location.hash === '#aviso-de-privacidad' || window.location.pathname === '/aviso-de-privacidad') {
+        setShowPrivacyPolicy(true);
+      } else if (showPrivacyPolicy && window.location.hash !== '#aviso-de-privacidad') {
+        setShowPrivacyPolicy(false);
+      }
+    };
+
+    handleHashChange();
+    window.addEventListener('hashchange', handleHashChange);
+    window.addEventListener('popstate', handleHashChange);
+
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+      window.removeEventListener('popstate', handleHashChange);
+    };
+  }, [showPrivacyPolicy]);
+
+  const handleOpenPrivacyPolicy = () => {
+    setShowPrivacyPolicy(true);
+    window.location.hash = '#aviso-de-privacidad';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleBackToHome = () => {
+    setShowPrivacyPolicy(false);
+    if (window.location.hash === '#aviso-de-privacidad') {
+      window.history.pushState('', document.title, window.location.pathname + window.location.search);
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleOpenBooking = () => {
+    if (showPrivacyPolicy) {
+      setShowPrivacyPolicy(false);
+    }
     handleSelectSection('contacto');
     setTimeout(() => {
       const dateEl = document.getElementById('fecha-diagnostico');
@@ -31,6 +70,9 @@ export function App() {
   };
 
   const handleSelectSection = (key: SectionKey) => {
+    if (showPrivacyPolicy) {
+      setShowPrivacyPolicy(false);
+    }
     setActiveSection(key);
 
     // If it's a non-default section (2, 3, 5, 6, 7, 8), reveal it
@@ -66,6 +108,15 @@ export function App() {
     }
     return revealedSections.has(key);
   };
+
+  if (showPrivacyPolicy) {
+    return (
+      <>
+        <PrivacyPolicy onBackToHome={handleBackToHome} />
+        <ChatbotWidget onOpenBooking={handleOpenBooking} />
+      </>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white text-slate-900 font-['Inter'] selection:bg-[#0052CC] selection:text-white flex flex-col">
@@ -130,7 +181,7 @@ export function App() {
       </main>
 
       {/* Footer */}
-      <Footer />
+      <Footer onOpenPrivacyPolicy={handleOpenPrivacyPolicy} />
 
       {/* Interactive AI Chatbot Widget */}
       <ChatbotWidget onOpenBooking={handleOpenBooking} />
