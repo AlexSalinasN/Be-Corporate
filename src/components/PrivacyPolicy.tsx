@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ArrowLeft, Shield, Mail, ExternalLink, Globe, Lock, FileText, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, Mail, ExternalLink, CheckCircle2 } from 'lucide-react';
 import { Logo } from './Logo';
 import { Footer } from './Footer';
 
@@ -41,10 +41,6 @@ export const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBackToHome }) =>
         <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-10 md:p-14 space-y-10">
           {/* Header Title Section */}
           <div className="border-b border-slate-100 pb-8">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-[#0052CC] text-xs font-bold uppercase tracking-wider mb-4">
-              <Shield className="w-3.5 h-3.5" />
-              <span>Transparencia y Protección Legal</span>
-            </div>
             <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-950 tracking-tight mb-3">
               Aviso de Privacidad
             </h1>
