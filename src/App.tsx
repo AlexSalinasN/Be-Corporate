@@ -176,7 +176,10 @@ export function App() {
 
         {/* PAGE 10: CONTACTO (Always visible in default view) */}
         {isVisible('contacto') && (
-          <ContactSection onOpenBooking={handleOpenBooking} />
+          <ContactSection
+            onOpenBooking={handleOpenBooking}
+            onOpenPrivacyPolicy={handleOpenPrivacyPolicy}
+          />
         )}
       </main>
 

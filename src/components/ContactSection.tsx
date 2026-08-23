@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle2, Shield, Calendar, Building2, Clock } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle2, Shield, Calendar, Building2, Clock, AlertCircle } from 'lucide-react';
 import { LeadFormData } from '../types';
 
 interface ContactSectionProps {
   onOpenBooking?: () => void;
+  onOpenPrivacyPolicy?: () => void;
 }
 
-export const ContactSection: React.FC<ContactSectionProps> = () => {
+export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenPrivacyPolicy }) => {
   // Tomorrow's date formatted as YYYY-MM-DD for minimum booking date
   const getMinDate = () => {
     const d = new Date();
@@ -26,6 +27,9 @@ export const ContactSection: React.FC<ContactSectionProps> = () => {
     hora: '10:00 AM (Hora CDMX)',
   });
 
+  const [acceptedPrivacy, setAcceptedPrivacy] = useState<boolean>(false);
+  const [privacyError, setPrivacyError] = useState<string | null>(null);
+
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [statusMessage, setStatusMessage] = useState('');
 
@@ -41,6 +45,17 @@ export const ContactSection: React.FC<ContactSectionProps> = () => {
     e.preventDefault();
     if (!formData.nombre || !formData.email) return;
 
+    if (!acceptedPrivacy) {
+      setPrivacyError('Es obligatorio aceptar el Aviso de Privacidad para enviar tu solicitud de diagnóstico.');
+      const privacyEl = document.getElementById('acepto-aviso-privacidad');
+      if (privacyEl) {
+        privacyEl.focus();
+        privacyEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return;
+    }
+
+    setPrivacyError(null);
     setStatus('loading');
 
     try {
@@ -344,9 +359,55 @@ export const ContactSection: React.FC<ContactSectionProps> = () => {
                   </select>
                 </div>
 
-                <div className="pt-3">
+                {/* Privacy Policy Checkbox (Mandatory) */}
+                <div
+                  className={`p-3.5 rounded-xl border transition-all ${
+                    privacyError
+                      ? 'bg-red-50/80 border-red-300 ring-2 ring-red-200'
+                      : 'bg-white border-slate-200 hover:border-slate-300'
+                  }`}
+                >
+                  <label htmlFor="acepto-aviso-privacidad" className="flex items-start gap-3 cursor-pointer select-none">
+                    <input
+                      type="checkbox"
+                      id="acepto-aviso-privacidad"
+                      checked={acceptedPrivacy}
+                      onChange={(e) => {
+                        setAcceptedPrivacy(e.target.checked);
+                        if (e.target.checked) setPrivacyError(null);
+                      }}
+                      className="mt-0.5 h-4 w-4 rounded border-slate-300 text-[#0052CC] focus:ring-[#0052CC] cursor-pointer accent-[#0052CC] shrink-0"
+                    />
+                    <span className="text-xs text-slate-700 leading-relaxed font-medium">
+                      He leído y acepto el{' '}
+                      <a
+                        href="#aviso-de-privacidad"
+                        onClick={(e) => {
+                          if (onOpenPrivacyPolicy) {
+                            e.preventDefault();
+                            onOpenPrivacyPolicy();
+                          }
+                        }}
+                        className="text-[#0052CC] font-bold underline hover:text-[#003E99] inline-flex items-center gap-0.5"
+                      >
+                        Aviso de Privacidad
+                      </a>{' '}
+                      de Be Corporate. <span className="text-red-600 font-bold">*</span>
+                    </span>
+                  </label>
+
+                  {privacyError && (
+                    <div className="mt-2.5 pt-2 border-t border-red-200/70 flex items-center gap-1.5 text-xs font-semibold text-red-600 animate-in fade-in">
+                      <AlertCircle className="w-3.5 h-3.5 shrink-0 text-red-600" />
+                      <span>{privacyError}</span>
+                    </div>
+                  )}
+                </div>
+
+                <div className="pt-2">
                   <button
                     type="submit"
+                    id="submit-diagnostico-button"
                     disabled={status === 'loading'}
                     className="w-full bg-[#0052CC] hover:bg-[#003E99] disabled:opacity-60 text-white text-xs font-bold uppercase tracking-wider py-4 rounded-lg transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer"
                   >
