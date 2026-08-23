@@ -53,7 +53,7 @@ export const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBackToHome }) =>
           <div className="prose prose-slate max-w-none text-slate-700 space-y-8 text-[15px] leading-relaxed">
             <div className="bg-slate-50 p-6 rounded-xl border border-slate-200/80 space-y-4">
               <p className="text-slate-800 leading-relaxed font-normal">
-                <strong className="text-slate-950 font-semibold">BE CORPORATE SOLUTIONS</strong>, que opera comercialmente bajo el nombre <strong className="text-slate-950 font-semibold">Be Corporate™</strong>, con domicilio en Ciudad de México, México, es responsable del tratamiento y protección de sus datos personales.
+                <strong className="text-slate-950 font-semibold">BC CORPORATE SOLUTIONS</strong>, que opera comercialmente bajo el nombre <strong className="text-slate-950 font-semibold">Be Corporate™</strong>, con domicilio en Ciudad de México, México, es responsable del tratamiento y protección de sus datos personales.
               </p>
               <p className="text-slate-700 leading-relaxed font-normal">
                 El presente Aviso de Privacidad se pone a su disposición de conformidad con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares, su Reglamento y demás disposiciones aplicables.
