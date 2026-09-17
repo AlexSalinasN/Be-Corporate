@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowRight, Award, Clock, Calendar, Sparkles, TrendingUp, ShieldCheck } from 'lucide-react';
 import { CLIENT_LOGOS } from '../data';
-import heroBoardroomImage from '../assets/images/exact_boardroom_meeting_1787196059786.jpg';
 
 interface HeroProps {
   onOpenBooking: () => void;
@@ -9,7 +8,7 @@ interface HeroProps {
 }
 
 export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onExplorePilot }) => {
-  const [imgSrc, setImgSrc] = useState<string>(heroBoardroomImage || '/assets/hero_striking.jpg');
+  const [imgSrc, setImgSrc] = useState<string>('/reunion.png');
   return (
     <section id="inicio" className="relative bg-white pt-10 pb-16 lg:pt-14 lg:pb-20 border-b border-slate-200 overflow-hidden font-['Inter']">
       {/* Background Architectural Mesh Grid */}

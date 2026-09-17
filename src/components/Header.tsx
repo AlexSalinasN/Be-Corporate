@@ -46,14 +46,17 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 transition-all font-['Inter'] shadow-xs">
-      <div className="max-w-[86rem] mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-3 lg:gap-6">
-        {/* LOGO: Clean executive framing */}
+      <div className="max-w-[86rem] mx-auto px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3 flex items-center justify-between gap-3 lg:gap-6">
+        {/* LOGO: Clean executive framing utilizing full allocated space */}
         <button
           onClick={() => handleNavClick('inicio')}
-          className="flex items-center group cursor-pointer focus:outline-none shrink-0 py-0.5"
+          className="flex items-center group cursor-pointer focus:outline-none shrink-0"
           aria-label="Ir a inicio de Be Corporate"
         >
-          <Logo size="lg" className="h-11 sm:h-12 lg:h-[50px] w-auto" />
+          <Logo
+            size="lg"
+            className="h-12 sm:h-13 md:h-14 lg:h-[58px] xl:h-[64px] w-auto max-w-[240px] sm:max-w-[270px] lg:max-w-[300px] object-contain rounded-md transition-transform duration-200 group-hover:scale-[1.02]"
+          />
         </button>
 
         {/* Desktop Navigation Links - Balanced spacing, no crowding */}

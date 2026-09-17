@@ -31,7 +31,7 @@ export const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBackToHome }) =>
             className="cursor-pointer flex items-center"
             title="Ir a página principal"
           >
-            <Logo size="md" className="h-10 sm:h-11 w-auto" />
+            <Logo size="md" className="h-11 sm:h-12 w-auto" />
           </button>
         </div>
       </header>
